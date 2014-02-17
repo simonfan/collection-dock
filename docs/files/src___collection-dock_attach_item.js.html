@@ -165,11 +165,10 @@ define(function (require, exports, module) {
 
 		if (_.isArray(model)) {
 			// array of models
-			var _this = this;
 
-			selector = _.map(model, function(model, index) {
-				return _this.itemSelector(model);
-			}).join(&#x27;,&#x27;);
+			selector = _.map(model, _.bind(function (model, index) {
+				return this.itemSelector(model);
+			}, this)).join(&#x27;,&#x27;);
 
 		} else {
 			// single model

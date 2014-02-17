@@ -108,12 +108,12 @@ define(function (require, exports, module) {
 	var handleReset = require(&#x27;../handle-reset/index&#x27;);
 
 	exports.beforeSort = function beforeSort(collection, $container) {
-		console.log(&#x27;beforeSort&#x27;)
+		console.log(&#x27;beforeSort&#x27;);
 		// no-op
 	};
 
 	exports.sort = function sort(collection, $container) {
-		_.bind(handleReset, this)(collection, $container);
+		handleReset.call(this, collection, $container);
 	};
 
 	exports.afterSort = function afterSort(collection, $container) {

@@ -105,7 +105,7 @@ define(function (require, exports, module) {
 	var _ = require(&#x27;lodash&#x27;);
 
 	exports.beforeRemove = function beforeRemove(model, $item) {
-		console.log(&#x27;beforeRemove&#x27;)
+		console.log(&#x27;beforeRemove&#x27;);
 
 		return $item.animate({ opacity: 0 });
 	};
