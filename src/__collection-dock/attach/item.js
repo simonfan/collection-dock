@@ -1,13 +1,10 @@
-//     collection-dock
-//     (c)
-//     collection-dock is licensed under the MIT terms.
-
 /**
- * AMD module.
+ * Defines methods that generate item-related templates and data.
+ * Methods here should be overwritten for custom behaviour.
  *
  * @module collection-dock
+ * @submodule item
  */
-
 define(function (require, exports, module) {
 	'use strict';
 
@@ -21,7 +18,7 @@ define(function (require, exports, module) {
 	 * @param model
 	 */
 	exports.itemPlaceholder = function itemPlaceholder(model) {
-		return '<li class="placeholder">placeholder for ' + model.get('id') + '</li>';
+		return '<div></div>';
 	};
 
 	/**
@@ -36,17 +33,18 @@ define(function (require, exports, module) {
 	};
 
 	/**
-	 *
+	 * Generate html string given a hash of data.
+	 * Compatible with _.template, and other simple templating tools.
 	 *
 	 * @method itemTemplate
 	 * @param data {Object}
 	 */
 	exports.itemTemplate = function itemTemplate(data) {
-		return '<li id="' + data.id + '"> Item id: ' + data.id + '</li>';
+		return '<div></div>';
 	};
 
 	/**
-	 *
+	 * Return a selector string, given the model.
 	 *
 	 * @method itemSelector
 	 * @param model
@@ -55,9 +53,8 @@ define(function (require, exports, module) {
 		return '[' + this.elementTypeAttribute + '="item"]' + ':eq(' + this.collection.indexOf(model) + ')';
 	};
 
-
 	/**
-	 *
+	 * The attribute name of the '$el' type (either 'placeholder' or 'item')
 	 *
 	 * @property elementTypeAttribute
 	 */

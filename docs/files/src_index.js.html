@@ -41,13 +41,39 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
+                <li><a href="../classes/collectionDock.html">collectionDock</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/attach.html">attach</a></li>
+            
+                <li><a href="../modules/attach.exec.html">attach.exec</a></li>
+            
+                <li><a href="../modules/attach.initialize.html">attach.initialize</a></li>
+            
                 <li><a href="../modules/collection-dock.html">collection-dock</a></li>
             
-                <li><a href="../modules/CollectionDock.html">CollectionDock</a></li>
+                <li><a href="../modules/handle-add.html">handle-add</a></li>
+            
+                <li><a href="../modules/handle-add:actions.html">handle-add:actions</a></li>
+            
+                <li><a href="../modules/handle-remove.html">handle-remove</a></li>
+            
+                <li><a href="../modules/handle-remove:actions.html">handle-remove:actions</a></li>
+            
+                <li><a href="../modules/handle-reset.html">handle-reset</a></li>
+            
+                <li><a href="../modules/handle-reset:actions.html">handle-reset:actions</a></li>
+            
+                <li><a href="../modules/handle-resort.html">handle-resort</a></li>
+            
+                <li><a href="../modules/handle-resort:actions.html">handle-resort:actions</a></li>
+            
+                <li><a href="../modules/item.html">item</a></li>
+            
+                <li><a href="../modules/proxy.html">proxy</a></li>
             
             </ul>
         </div>
@@ -88,14 +114,14 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
-//     CollectionDock
-//     (c)
-//     CollectionDock is licensed under the MIT terms.
+//     collection-dock
+//     (c) simonfan
+//     collection-dock is licensed under the MIT terms.
 
 /**
- * AMD module.
+ * Object that connects data to the html.
  *
- * @module CollectionDock
+ * @module collection-dock
  */
 
 define(function (require, exports, module) {
@@ -107,11 +133,23 @@ define(function (require, exports, module) {
 	// sub
 	var intiAttach = require(&#x27;./__collection-dock/attach/initialize&#x27;);
 
-	var dock = module.exports = subject(function collectionDock($el) {
+	/**
+	 * @class collectionDock
+	 * @constructor
+	 * @param extensions {Object}
+	 */
+	var dock = module.exports = subject(function collectionDock(extensions) {
+
 		/**
-		 * The $container within which the items should be rendered.
+		 * The extensions object will be incorporated to the new object.
+		 *
+		 * @param extensions
 		 */
-		this.$el = $el || this.$el;
+		_.extend(this, extensions);
+
+		if (!this.$el) {
+			throw new Error(&#x27;No &quot;$el&quot; property found on dock.&#x27;);
+		}
 
 		// initialize attach
 		intiAttach.call(this);

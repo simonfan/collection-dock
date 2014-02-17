@@ -1,13 +1,9 @@
-//     collection-dock
-//     (c)
-//     collection-dock is licensed under the MIT terms.
-
 /**
- * AMD module.
+ * Initialization logic for attach.
  *
  * @module collection-dock
+ * @submodule attach.initialize
  */
-
 define(function (require, exports, module) {
 	'use strict';
 

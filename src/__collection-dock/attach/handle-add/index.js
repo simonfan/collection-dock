@@ -1,13 +1,9 @@
-//     collection-dock
-//     (c)
-//     collection-dock is licensed under the MIT terms.
-
 /**
- * AMD module.
+ * Defines the event handler for 'add' events on the collection.
  *
  * @module collection-dock
+ * @submodule handle-add
  */
-
 define(function (require, exports, module) {
 	'use strict';
 

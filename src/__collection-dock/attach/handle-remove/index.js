@@ -1,3 +1,9 @@
+/**
+ * Defines the event handler for 'remove' events on the collection.
+ *
+ * @module collection-dock
+ * @submodule handle-remove
+ */
 define(function (require, exports, module) {
 	'use strict';
 
@@ -12,7 +18,7 @@ define(function (require, exports, module) {
 		// find the item to be removed
 		var $item = this.retrieve$El(model);
 
-		console.log($item);
+	//	console.log($item);
 
 		this.qExecSequence(['beforeRemove', 'remove', 'afterRemove'], [model, $item]);
 	};

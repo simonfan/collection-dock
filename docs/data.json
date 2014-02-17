@@ -7,7 +7,7 @@
         "src/__collection-dock/attach/handle-add/actions.js": {
             "name": "src/__collection-dock/attach/handle-add/actions.js",
             "modules": {
-                "collection-dock": 1
+                "handle-add:actions": 1
             },
             "classes": {},
             "fors": {},
@@ -15,77 +15,108 @@
         },
         "src/__collection-dock/attach/handle-add/index.js": {
             "name": "src/__collection-dock/attach/handle-add/index.js",
-            "modules": {},
+            "modules": {
+                "handle-add": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "src/__collection-dock/attach/handle-remove/actions.js": {
             "name": "src/__collection-dock/attach/handle-remove/actions.js",
-            "modules": {},
+            "modules": {
+                "handle-remove:actions": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "src/__collection-dock/attach/handle-remove/index.js": {
             "name": "src/__collection-dock/attach/handle-remove/index.js",
-            "modules": {},
+            "modules": {
+                "handle-remove": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "src/__collection-dock/attach/handle-reset/actions.js": {
             "name": "src/__collection-dock/attach/handle-reset/actions.js",
-            "modules": {},
+            "modules": {
+                "handle-reset:actions": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "src/__collection-dock/attach/handle-reset/index.js": {
             "name": "src/__collection-dock/attach/handle-reset/index.js",
-            "modules": {},
+            "modules": {
+                "handle-reset": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "src/__collection-dock/attach/handle-resort/actions.js": {
             "name": "src/__collection-dock/attach/handle-resort/actions.js",
-            "modules": {},
+            "modules": {
+                "handle-resort:actions": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "src/__collection-dock/attach/handle-resort/index.js": {
             "name": "src/__collection-dock/attach/handle-resort/index.js",
-            "modules": {},
+            "modules": {
+                "handle-resort": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "src/__collection-dock/attach/exec.js": {
             "name": "src/__collection-dock/attach/exec.js",
-            "modules": {},
+            "modules": {
+                "attach.exec": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "src/__collection-dock/attach/index.js": {
             "name": "src/__collection-dock/attach/index.js",
-            "modules": {},
+            "modules": {
+                "attach": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "src/__collection-dock/attach/initialize.js": {
             "name": "src/__collection-dock/attach/initialize.js",
-            "modules": {},
+            "modules": {
+                "attach.initialize": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "src/__collection-dock/attach/item.js": {
             "name": "src/__collection-dock/attach/item.js",
-            "modules": {},
+            "modules": {
+                "item": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/__collection-dock/proxy.js": {
+            "name": "src/__collection-dock/proxy.js",
+            "modules": {
+                "proxy": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
@@ -93,9 +124,11 @@
         "src/index.js": {
             "name": "src/index.js",
             "modules": {
-                "CollectionDock": 1
+                "collection-dock": 1
             },
-            "classes": {},
+            "classes": {
+                "collectionDock": 1
+            },
             "fors": {},
             "namespaces": {}
         }
@@ -103,32 +136,228 @@
     "modules": {
         "collection-dock": {
             "name": "collection-dock",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "src/__collection-dock/attach/handle-add/actions.js",
-            "line": 5,
-            "description": "AMD module."
-        },
-        "CollectionDock": {
-            "name": "CollectionDock",
-            "submodules": {},
-            "classes": {},
+            "submodules": {
+                "handle-add:actions": 1,
+                "handle-add": 1,
+                "handle-remove:actions": 1,
+                "handle-remove": 1,
+                "handle-reset:actions": 1,
+                "handle-reset": 1,
+                "handle-resort:actions": 1,
+                "handle-resort": 1,
+                "attach.exec": 1,
+                "attach": 1,
+                "attach.initialize": 1,
+                "item": 1,
+                "proxy": 1
+            },
+            "classes": {
+                "collectionDock": 1
+            },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "src/index.js",
-            "line": 5,
-            "description": "AMD module."
+            "line": 20,
+            "description": "Object that connects data to the html."
+        },
+        "handle-add:actions": {
+            "name": "handle-add:actions",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/handle-add/actions.js",
+            "line": 1,
+            "description": "Defines a series of actions (steps)\nthat deal with adding models to the view."
+        },
+        "handle-add": {
+            "name": "handle-add",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/handle-add/index.js",
+            "line": 1,
+            "description": "Defines the event handler for 'add' events on the collection."
+        },
+        "handle-remove:actions": {
+            "name": "handle-remove:actions",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/handle-remove/actions.js",
+            "line": 1,
+            "description": "Defines a series of actions (steps)\nthat deal with removing models from the view."
+        },
+        "handle-remove": {
+            "name": "handle-remove",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/handle-remove/index.js",
+            "line": 1,
+            "description": "Defines the event handler for 'remove' events on the collection."
+        },
+        "handle-reset:actions": {
+            "name": "handle-reset:actions",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/handle-reset/actions.js",
+            "line": 1,
+            "description": "Defines a series of actions (steps)\nthat deal with resetting models to the view."
+        },
+        "handle-reset": {
+            "name": "handle-reset",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/handle-reset/index.js",
+            "line": 1,
+            "description": "Defines the event handler for 'reset' events on the collection."
+        },
+        "handle-resort:actions": {
+            "name": "handle-resort:actions",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/handle-resort/actions.js",
+            "line": 1,
+            "description": "Defines a series of actions (steps)\nthat deal with resorting models of the view."
+        },
+        "handle-resort": {
+            "name": "handle-resort",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/handle-resort/index.js",
+            "line": 1,
+            "description": "Defines the event handler for 'resort' events on the collection."
+        },
+        "attach.exec": {
+            "name": "attach.exec",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/exec.js",
+            "line": 1,
+            "description": "Defines an action runner."
+        },
+        "attach": {
+            "name": "attach",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/index.js",
+            "line": 1,
+            "description": "Defines methods that will be available\non dock instances."
+        },
+        "attach.initialize": {
+            "name": "attach.initialize",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/initialize.js",
+            "line": 1,
+            "description": "Initialization logic for attach."
+        },
+        "item": {
+            "name": "item",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/attach/item.js",
+            "line": 1,
+            "description": "Defines methods that generate item-related templates and data.\nMethods here should be overwritten for custom behaviour."
+        },
+        "proxy": {
+            "name": "proxy",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/proxy.js",
+            "line": 1,
+            "description": "Proxies methods to the collection, if it is present."
         }
     },
-    "classes": {},
+    "classes": {
+        "collectionDock": {
+            "name": "collectionDock",
+            "shortname": "collectionDock",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/index.js",
+            "line": 20,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "extensions",
+                    "description": "",
+                    "type": "Object"
+                }
+            ]
+        }
+    },
     "classitems": [
         {
             "file": "src/__collection-dock/attach/handle-add/actions.js",
-            "line": 18,
+            "line": 15,
             "description": "Step in which the placeholder is put into place.",
             "itemtype": "method",
             "name": "place",
@@ -144,12 +373,13 @@
                     "type": "Jq Object"
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "handle-add:actions"
         },
         {
             "file": "src/__collection-dock/attach/handle-add/actions.js",
-            "line": 37,
+            "line": 34,
             "description": "Action run before the item is placed.\nReturn promise if you need async functionality.",
             "itemtype": "method",
             "name": "beforeAdd",
@@ -170,12 +400,13 @@
                     "type": "Jq Object"
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "handle-add:actions"
         },
         {
             "file": "src/__collection-dock/attach/handle-add/actions.js",
-            "line": 54,
+            "line": 51,
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -192,12 +423,13 @@
                     "description": ""
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "handle-add:actions"
         },
         {
             "file": "src/__collection-dock/attach/handle-add/actions.js",
-            "line": 67,
+            "line": 64,
             "itemtype": "method",
             "name": "afterAdd",
             "params": [
@@ -210,12 +442,13 @@
                     "description": ""
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "handle-add:actions"
         },
         {
             "file": "src/__collection-dock/attach/handle-add/index.js",
-            "line": 19,
+            "line": 15,
             "description": "Handles add events on the collection.",
             "itemtype": "method",
             "name": "handleAdd",
@@ -228,12 +461,13 @@
                     "type": "Model Object"
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "handle-add"
         },
         {
             "file": "src/__collection-dock/attach/handle-remove/index.js",
-            "line": 4,
+            "line": 10,
             "description": "Handles add events on the collection.",
             "itemtype": "method",
             "name": "handleRemove",
@@ -246,13 +480,14 @@
                     "type": "Model Object"
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "handle-remove"
         },
         {
             "file": "src/__collection-dock/attach/handle-reset/index.js",
-            "line": 4,
-            "description": "Handles add events on the collection.",
+            "line": 10,
+            "description": "Handles reset events on the collection.",
             "itemtype": "method",
             "name": "handleReset",
             "access": "private",
@@ -264,13 +499,14 @@
                     "type": "Model Object"
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "handle-reset"
         },
         {
             "file": "src/__collection-dock/attach/handle-resort/index.js",
-            "line": 4,
-            "description": "Handles add events on the collection.",
+            "line": 10,
+            "description": "Handles resort events on the collection.",
             "itemtype": "method",
             "name": "handleResort",
             "access": "private",
@@ -282,12 +518,13 @@
                     "type": "Model Object"
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "handle-resort"
         },
         {
             "file": "src/__collection-dock/attach/exec.js",
-            "line": 18,
+            "line": 14,
             "description": "Calls a method with a given set of arguments.\nAlways return",
             "itemtype": "method",
             "name": "exec",
@@ -303,19 +540,43 @@
                     "type": "Array"
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "attach.exec"
+        },
+        {
+            "file": "src/__collection-dock/attach/exec.js",
+            "line": 38,
+            "description": "Runs a sequence of methods with given args.",
+            "itemtype": "method",
+            "name": "qExecSequence",
+            "params": [
+                {
+                    "name": "sequence",
+                    "description": "",
+                    "type": "Array"
+                },
+                {
+                    "name": "args",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "attach.exec"
         },
         {
             "file": "src/__collection-dock/attach/index.js",
-            "line": 23,
+            "line": 20,
             "description": "event that indicates that the collection was completely\nreordered.",
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "attach"
         },
         {
             "file": "src/__collection-dock/attach/index.js",
-            "line": 29,
+            "line": 26,
             "description": "Attaches a given Backbone collection to the data dock.\nbasically detaches the previous collection and sets new listeners.",
             "itemtype": "method",
             "name": "attach",
@@ -325,21 +586,23 @@
                     "description": ""
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "attach"
         },
         {
             "file": "src/__collection-dock/attach/index.js",
-            "line": 56,
+            "line": 53,
             "description": "Detaches the collection from the dock.\nBasically removes listeners.",
             "itemtype": "method",
             "name": "detach",
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "attach"
         },
         {
             "file": "src/__collection-dock/attach/item.js",
-            "line": 17,
+            "line": 14,
             "description": "Returns a placeholder for the item.",
             "itemtype": "method",
             "name": "itemPlaceholder",
@@ -349,12 +612,13 @@
                     "description": ""
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
         },
         {
             "file": "src/__collection-dock/attach/item.js",
-            "line": 27,
+            "line": 24,
             "description": "Returns the data from the model.",
             "itemtype": "method",
             "name": "itemData",
@@ -370,12 +634,14 @@
                     "optional": true
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
         },
         {
             "file": "src/__collection-dock/attach/item.js",
-            "line": 38,
+            "line": 35,
+            "description": "Generate html string given a hash of data.\nCompatible with _.template, and other simple templating tools.",
             "itemtype": "method",
             "name": "itemTemplate",
             "params": [
@@ -385,12 +651,14 @@
                     "type": "Object"
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
         },
         {
             "file": "src/__collection-dock/attach/item.js",
-            "line": 48,
+            "line": 46,
+            "description": "Return a selector string, given the model.",
             "itemtype": "method",
             "name": "itemSelector",
             "params": [
@@ -399,20 +667,23 @@
                     "description": ""
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
         },
         {
             "file": "src/__collection-dock/attach/item.js",
-            "line": 59,
+            "line": 56,
+            "description": "The attribute name of the '$el' type (either 'placeholder' or 'item')",
             "itemtype": "property",
             "name": "elementTypeAttribute",
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
         },
         {
             "file": "src/__collection-dock/attach/item.js",
-            "line": 66,
+            "line": 63,
             "description": "Method that retrieves the $el for a given backbone model.\nUses the 'itemSelector' method.",
             "itemtype": "method",
             "name": "retrieve$El",
@@ -423,25 +694,32 @@
                     "optional": true
                 }
             ],
-            "class": "",
-            "module": "collection-dock"
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
         },
         {
             "file": "src/index.js",
-            "line": 21,
-            "description": "The $container within which the items should be rendered.",
-            "class": "",
-            "module": "CollectionDock"
+            "line": 27,
+            "description": "The extensions object will be incorporated to the new object.",
+            "params": [
+                {
+                    "name": "extensions",
+                    "description": ""
+                }
+            ],
+            "class": "collectionDock",
+            "module": "collection-dock"
         }
     ],
     "warnings": [
         {
             "message": "Missing item type\nevent that indicates that the collection was completely\nreordered.",
-            "line": " src/__collection-dock/attach/index.js:23"
+            "line": " src/__collection-dock/attach/index.js:20"
         },
         {
-            "message": "Missing item type\nThe $container within which the items should be rendered.",
-            "line": " src/index.js:21"
+            "message": "Missing item type\nThe extensions object will be incorporated to the new object.",
+            "line": " src/index.js:27"
         }
     ]
 }

@@ -1,11 +1,11 @@
-//     CollectionDock
-//     (c)
-//     CollectionDock is licensed under the MIT terms.
+//     collection-dock
+//     (c) simonfan
+//     collection-dock is licensed under the MIT terms.
 
 /**
- * AMD module.
+ * Object that connects data to the html.
  *
- * @module CollectionDock
+ * @module collection-dock
  */
 
 define(function (require, exports, module) {
@@ -17,11 +17,23 @@ define(function (require, exports, module) {
 	// sub
 	var intiAttach = require('./__collection-dock/attach/initialize');
 
-	var dock = module.exports = subject(function collectionDock($el) {
+	/**
+	 * @class collectionDock
+	 * @constructor
+	 * @param extensions {Object}
+	 */
+	var dock = module.exports = subject(function collectionDock(extensions) {
+
 		/**
-		 * The $container within which the items should be rendered.
+		 * The extensions object will be incorporated to the new object.
+		 *
+		 * @param extensions
 		 */
-		this.$el = $el || this.$el;
+		_.extend(this, extensions);
+
+		if (!this.$el) {
+			throw new Error('No "$el" property found on dock.');
+		}
 
 		// initialize attach
 		intiAttach.call(this);

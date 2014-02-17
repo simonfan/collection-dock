@@ -41,13 +41,39 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
+                <li><a href="../classes/collectionDock.html">collectionDock</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/attach.html">attach</a></li>
+            
+                <li><a href="../modules/attach.exec.html">attach.exec</a></li>
+            
+                <li><a href="../modules/attach.initialize.html">attach.initialize</a></li>
+            
                 <li><a href="../modules/collection-dock.html">collection-dock</a></li>
             
-                <li><a href="../modules/CollectionDock.html">CollectionDock</a></li>
+                <li><a href="../modules/handle-add.html">handle-add</a></li>
+            
+                <li><a href="../modules/handle-add:actions.html">handle-add:actions</a></li>
+            
+                <li><a href="../modules/handle-remove.html">handle-remove</a></li>
+            
+                <li><a href="../modules/handle-remove:actions.html">handle-remove:actions</a></li>
+            
+                <li><a href="../modules/handle-reset.html">handle-reset</a></li>
+            
+                <li><a href="../modules/handle-reset:actions.html">handle-reset:actions</a></li>
+            
+                <li><a href="../modules/handle-resort.html">handle-resort</a></li>
+            
+                <li><a href="../modules/handle-resort:actions.html">handle-resort:actions</a></li>
+            
+                <li><a href="../modules/item.html">item</a></li>
+            
+                <li><a href="../modules/proxy.html">proxy</a></li>
             
             </ul>
         </div>
@@ -88,11 +114,17 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+/**
+ * Defines the event handler for &#x27;resort&#x27; events on the collection.
+ *
+ * @module collection-dock
+ * @submodule handle-resort
+ */
 define(function (require, exports, module) {
 	&#x27;use strict&#x27;;
 
 	/**
-	 * Handles add events on the collection.
+	 * Handles resort events on the collection.
 	 *
 	 * @method handleResort
 	 * @private
@@ -101,7 +133,6 @@ define(function (require, exports, module) {
 	module.exports = function handleResort(collection, options) {
 		this.qExecSequence([&#x27;beforeSort&#x27;, &#x27;sort&#x27;, &#x27;afterSort&#x27;], [collection, this.$el]);
 	};
-
 });
 
     </pre>

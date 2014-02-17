@@ -1,13 +1,9 @@
-//     collection-dock
-//     (c)
-//     collection-dock is licensed under the MIT terms.
-
 /**
- * AMD module.
+ * Defines an action runner.
  *
  * @module collection-dock
+ * @submodule attach.exec
  */
-
 define(function (require, exports, module) {
 	'use strict';
 
@@ -39,7 +35,13 @@ define(function (require, exports, module) {
 		return Q(exec);
 	};
 
-
+	/**
+	 * Runs a sequence of methods with given args.
+	 *
+	 * @method qExecSequence
+	 * @param sequence {Array}
+	 * @param args {Array}
+	 */
 	exports.qExecSequence = function qExecSequence(sequence, args) {
 
 		// transform the metho name array

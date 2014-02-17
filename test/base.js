@@ -31,7 +31,7 @@
 
 		it('is fine (:', function () {
 
-			var dock = collectionDock(this.$fixture);
+			var dock = collectionDock({ $el: this.$fixture });
 
 			// dock instantiation
 			dock.should.be.type('object');
@@ -39,7 +39,7 @@
 
 		it('presents attached collections on attachment', function (done) {
 
-			var dock = collectionDock(this.$fixture);
+			var dock = collectionDock({ $el: this.$fixture });
 
 			var fruits = new Backbone.Collection([
 				{ name: 'Banana', id: 0 },
@@ -60,7 +60,7 @@
 		 */
 		describe('item', function () {
 			beforeEach(function (done) {
-				this.dock = collectionDock(this.$fixture);
+				this.dock = collectionDock({ $el: this.$fixture });
 
 				this.fruits = new Backbone.Collection();
 
@@ -82,7 +82,7 @@
 				var $el = this.dock.retrieve$El(this.fruits.get(2));
 
 				$el.should.be.type('object');
-				$el.prop('id').should.eql(2);
+				$el.length.should.eql(1);
 			});
 		});
 
@@ -98,7 +98,7 @@
 		describe('handleAdd', function () {
 
 			beforeEach(function () {
-				this.dock = collectionDock(this.$fixture);
+				this.dock = collectionDock({ $el: this.$fixture });
 			})
 
 			it('handles adding', function () {
@@ -139,7 +139,7 @@
 		 */
 		describe('handleRemove', function () {
 			beforeEach(function (done) {
-				this.dock = collectionDock(this.$fixture);
+				this.dock = collectionDock({ $el: this.$fixture });
 
 				this.fruits = new Backbone.Collection();
 

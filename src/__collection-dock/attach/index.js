@@ -1,13 +1,10 @@
-//     collection-dock
-//     (c)
-//     collection-dock is licensed under the MIT terms.
-
 /**
- * AMD module.
+ * Defines methods that will be available
+ * on dock instances.
  *
  * @module collection-dock
+ * @submodule attach
  */
-
 define(function (require, exports, module) {
 	'use strict';
 

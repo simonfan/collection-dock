@@ -1,13 +1,10 @@
-//     collection-dock
-//     (c)
-//     collection-dock is licensed under the MIT terms.
-
 /**
- * AMD module.
+ * Defines a series of actions (steps)
+ * that deal with resorting models of the view.
  *
  * @module collection-dock
+ * @submodule handle-resort:actions
  */
-
 define(function (require, exports, module) {
 	'use strict';
 
@@ -18,7 +15,7 @@ define(function (require, exports, module) {
 	var handleReset = require('../handle-reset/index');
 
 	exports.beforeSort = function beforeSort(collection, $container) {
-		console.log('beforeSort');
+	//	console.log('beforeSort');
 		// no-op
 	};
 
@@ -27,7 +24,7 @@ define(function (require, exports, module) {
 	};
 
 	exports.afterSort = function afterSort(collection, $container) {
-		console.log('afterSort');
+	//	console.log('afterSort');
 		// no-op
 	};
 });

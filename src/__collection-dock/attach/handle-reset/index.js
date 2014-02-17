@@ -1,8 +1,14 @@
+/**
+ * Defines the event handler for 'reset' events on the collection.
+ *
+ * @module collection-dock
+ * @submodule handle-reset
+ */
 define(function (require, exports, module) {
 	'use strict';
 
 	/**
-	 * Handles add events on the collection.
+	 * Handles reset events on the collection.
 	 *
 	 * @method handleReset
 	 * @private

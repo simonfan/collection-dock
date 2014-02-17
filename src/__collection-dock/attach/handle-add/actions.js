@@ -1,13 +1,10 @@
-//     collection-dock
-//     (c)
-//     collection-dock is licensed under the MIT terms.
-
 /**
- * AMD module.
+ * Defines a series of actions (steps)
+ * that deal with adding models to the view.
  *
  * @module collection-dock
+ * @submodule handle-add:actions
  */
-
 define(function (require, exports, module) {
 	'use strict';
 
