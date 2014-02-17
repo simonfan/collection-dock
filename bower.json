@@ -5,9 +5,9 @@
   "description": "Some module...",
   "dependencies": {
     "lodash": "~2.4.1",
-    "subject": "~0.3.3",
     "q": "~1.0.0",
-    "jquery": "~2.1.0"
+    "jquery": "~2.1.0",
+    "lowercase-backbone": "*"
   },
   "devDependencies": {
     "requirejs": "*",

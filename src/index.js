@@ -12,7 +12,7 @@ define(function (require, exports, module) {
 	'use strict';
 
 	var _ = require('lodash'),
-		subject = require('subject');
+		backbone = require('lowercase-backbone');
 
 	// sub
 	var intiAttach = require('./__collection-dock/attach/initialize');
@@ -22,7 +22,7 @@ define(function (require, exports, module) {
 	 * @constructor
 	 * @param extensions {Object}
 	 */
-	var dock = module.exports = subject(function collectionDock(extensions) {
+	var dock = module.exports = backbone.view.extend(function collectionDock(extensions) {
 
 		/**
 		 * The extensions object will be incorporated to the new object.

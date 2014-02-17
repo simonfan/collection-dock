@@ -15,7 +15,8 @@ require.config({
 		sizzle: '../bower_components/sizzle/dist/sizzle',
 		underscore: '../bower_components/underscore/underscore',
 		q: '../bower_components/q/q',
-		backbone: '../bower_components/backbone/backbone'
+		backbone: '../bower_components/backbone/backbone',
+		'lowercase-backbone': '../bower_components/lowercase-backbone/built/lowercase-backbone'
 	},
 	shim: {
 		backbone: {
