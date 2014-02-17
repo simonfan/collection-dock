@@ -1,0 +1,3 @@
+# collection-dock[![Build Status](https://secure.travis-ci.org/simonfan/collection-dock.png?branch=master)](http://travis-ci.org/simonfan/collection-dock)
+
+Some module...
