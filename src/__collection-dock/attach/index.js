@@ -66,7 +66,7 @@ define(function (require, exports, module) {
 				.off(this.resortEvent, void(0), this);
 		}
 
-		this.$el.html('');
+		this.$container.html('');
 	};
 
 	// item-related

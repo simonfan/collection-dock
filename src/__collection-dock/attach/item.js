@@ -82,6 +82,6 @@ define(function (require, exports, module) {
 			selector = this.itemSelector(model);
 		}
 
-		return this.$el.find(selector);
+		return this.$container.find(selector);
 	};
 });

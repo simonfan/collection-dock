@@ -15,6 +15,6 @@ define(function (require, exports, module) {
 	 * @param model {model Object}
 	 */
 	module.exports = function handleResort(collection, options) {
-		this.qExecSequence(['beforeSort', 'sort', 'afterSort'], [collection, this.$el]);
+		this.qExecSequence(['beforeSort', 'sort', 'afterSort'], [collection, this.$container]);
 	};
 });

@@ -35,6 +35,15 @@ define(function (require, exports, module) {
 			throw new Error('No "$el" property found on dock.');
 		}
 
+		// get the container.
+		var $container = this.$container;
+
+		if ($container) {
+			this.$container = _.isString($container) ? this.$el.find($container) : $container;
+		} else {
+			this.$container = this.$el;
+		}
+
 		// initialize attach
 		intiAttach.call(this);
 	});

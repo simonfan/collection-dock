@@ -22,12 +22,12 @@ define(function (require, exports, module) {
 	exports.place = function place(model, $placeholder) {
 	//	console.log('place')
 		var index = this.collection.indexOf(model),
-			$beforeIndex = this.$el.children().eq(index - 1);
+			$beforeIndex = this.$container.children().eq(index - 1);
 
 		if ($beforeIndex.length > 0) {
 			$beforeIndex.after($placeholder);
 		} else {
-			this.$el.append($placeholder);
+			this.$container.append($placeholder);
 		}
 	};
 

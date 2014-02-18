@@ -15,7 +15,7 @@ define(function (require, exports, module) {
 	 * @param model {model Object}
 	 */
 	module.exports = function handleReset(collection, options) {
-		this.qExecSequence(['beforeReset', 'reset', 'afterReset'], [collection, this.$el]);
+		this.qExecSequence(['beforeReset', 'reset', 'afterReset'], [collection, this.$container]);
 	};
 
 });
