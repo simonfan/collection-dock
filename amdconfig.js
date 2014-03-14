@@ -16,7 +16,9 @@ require.config({
 		underscore: '../bower_components/underscore/underscore',
 		q: '../bower_components/q/q',
 		backbone: '../bower_components/backbone/backbone',
-		'lowercase-backbone': '../bower_components/lowercase-backbone/built/lowercase-backbone'
+		'lowercase-backbone': '../bower_components/lowercase-backbone/built/lowercase-backbone',
+		'jquery.filler': '../bower_components/jquery.filler/built/jquery.filler',
+		'model-dock': '../bower_components/model-dock/built/model-dock'
 	},
 	shim: {
 		backbone: {

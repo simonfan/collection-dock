@@ -48,5 +48,9 @@ define(function (require, exports, module) {
 		intiAttach.call(this);
 	});
 
-	dock.proto(require('./__collection-dock/attach/index'));
+	dock.proto(require('./__collection-dock/attach/methods'));
+
+	dock.proto({
+		modelView: require('model-dock'),
+	});
 });
