@@ -77,13 +77,6 @@
 				// run at next tick.
 				setTimeout(done, 10);
 			});
-
-			it('retrieve$El', function () {
-				var $el = this.dock.retrieve$El(this.fruits.get(2));
-
-				$el.should.be.type('object');
-				$el.length.should.eql(1);
-			});
 		});
 
 

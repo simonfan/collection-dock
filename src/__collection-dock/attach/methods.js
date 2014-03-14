@@ -11,12 +11,6 @@ define(function (require, exports, module) {
 	// external
 	var _ = require('lodash');
 
-	// sub
-	var handleAdd = require('./handle-add/index'),
-		handleRemove = require('./handle-remove/index'),
-		handleReset = require('./handle-reset/index'),
-		handleResort = require('./handle-resort/index');
-
 	/**
 	 * event that indicates that the collection was completely
 	 * reordered.
@@ -40,13 +34,13 @@ define(function (require, exports, module) {
 
 		// [3] events
 		collection
-			.on('add', _.bind(handleAdd, this))
-			.on('remove', _.bind(handleRemove, this))
-			.on('reset', _.bind(handleReset, this))
-			.on(this.resortEvent, _.bind(handleResort));
+			.on('add', this.handleAdd)
+			.on('remove', this.handleRemove)
+			.on('reset', this.handleReset)
+			.on(this.resortEvent, this.handleResort);
 
 		// [4] start.
-		handleReset.call(this, collection);
+		this.handleReset(collection);
 	};
 
 
@@ -72,12 +66,6 @@ define(function (require, exports, module) {
 	// item-related
 	_.extend(exports, require('./item'));
 
-	// action runner
-	_.extend(exports, require('./exec'));
-
-	// actions
-	_.extend(exports, require('./handle-add/actions'));
-	_.extend(exports, require('./handle-remove/actions'));
-	_.extend(exports, require('./handle-reset/actions'));
-	_.extend(exports, require('./handle-resort/actions'));
+	// event-handlers
+	_.extend(exports, require('./event-handlers'));
 });

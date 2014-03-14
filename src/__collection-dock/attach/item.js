@@ -12,76 +12,55 @@ define(function (require, exports, module) {
 	var _ = require('lodash');
 
 	/**
-	 * Returns a placeholder for the item.
+	 * Places the $item at a given position within the container.
 	 *
-	 * @method itemPlaceholder
-	 * @param model
+	 * @method placeItemHtml
+	 * @param at {Number}
+	 * @param $item {jq Object}
 	 */
-	exports.itemPlaceholder = function itemPlaceholder(model) {
-		return '<div></div>';
-	};
+	exports.placeItemHtml = function placeItemHtml(at, $item) {
 
-	/**
-	 * Returns the data from the model.
-	 *
-	 * @method itemData
-	 * @param model
-	 * @param [done] {Function}
-	 */
-	exports.itemData = function itemData(model) {
-		return model.attributes;
-	};
+		var $beforeIndex = this.$container.children().eq(at - 1);
 
-	/**
-	 * Generate html string given a hash of data.
-	 * Compatible with _.template, and other simple templating tools.
-	 *
-	 * @method itemTemplate
-	 * @param data {Object}
-	 */
-	exports.itemTemplate = function itemTemplate(data) {
-		return '<div></div>';
-	};
-
-	/**
-	 * Return a selector string, given the model.
-	 *
-	 * @method itemSelector
-	 * @param model
-	 */
-	exports.itemSelector = function itemSelector(model) {
-		return '[' + this.elementTypeAttribute + '="item"]' + ':eq(' + this.collection.indexOf(model) + ')';
-	};
-
-	/**
-	 * The attribute name of the '$el' type (either 'placeholder' or 'item')
-	 *
-	 * @property elementTypeAttribute
-	 */
-	exports.elementTypeAttribute = 'data-__collection-dock__-type';
-
-	/**
-	 * Method that retrieves the $el for a given backbone model.
-	 * Uses the 'itemSelector' method.
-	 *
-	 * @method retrieve$El
-	 * @param [model]
-	 */
-	exports.retrieve$El = function retrieve$El(model) {
-		var selector;
-
-		if (_.isArray(model)) {
-			// array of models
-
-			selector = _.map(model, _.bind(function (model, index) {
-				return this.itemSelector(model);
-			}, this)).join(',');
-
+		if ($beforeIndex.length > 0) {
+			$beforeIndex.after($item);
 		} else {
-			// single model
-			selector = this.itemSelector(model);
+			this.$container.append($item);
 		}
+	};
 
-		return this.$container.find(selector);
+	/**
+	 * Either method or property,
+	 * is / returns the html string for the item.
+	 *
+	 * @method itemHtml
+	 * @param model
+	 */
+	exports.itemHtml = '<div></div>';
+
+	/**
+	 * Must return an view object with a 'remove' method.
+	 *
+	 *
+	 */
+	exports.itemView = require('model-dock');
+
+	/**
+	 * Retrieves OR stores the view that represents a model instance.
+	 *
+	 * @method itemViewInstance
+	 * @param model {Bakcobne Model Object}
+	 * @param [view] {Bakcobne View Object}
+	 */
+	exports.itemViewInstance = function itemViewInstance(model, view) {
+
+		if (arguments.length === 1) {
+			// get
+			return this.itemViews[model.cid];
+
+		} else if (arguments.length === 2) {
+			// store
+			this.itemViews[model.cid] = view;
+		}
 	};
 });

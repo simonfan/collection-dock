@@ -5,17 +5,9 @@ YUI.add("yuidoc-meta", function(Y) {
     ],
     "modules": [
         "attach",
-        "attach.exec",
         "attach.initialize",
         "collection-dock",
-        "handle-add",
-        "handle-add:actions",
-        "handle-remove",
-        "handle-remove:actions",
-        "handle-reset",
-        "handle-reset:actions",
-        "handle-resort",
-        "handle-resort:actions",
+        "event-hanlders",
         "item",
         "proxy"
     ],
@@ -24,11 +16,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "attach",
             "name": "attach",
             "description": "Defines methods that will be available\non dock instances."
-        },
-        {
-            "displayName": "attach.exec",
-            "name": "attach.exec",
-            "description": "Defines an action runner."
         },
         {
             "displayName": "attach.initialize",
@@ -41,44 +28,9 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "Object that connects data to the html."
         },
         {
-            "displayName": "handle-add",
-            "name": "handle-add",
+            "displayName": "event-hanlders",
+            "name": "event-hanlders",
             "description": "Defines the event handler for 'add' events on the collection."
-        },
-        {
-            "displayName": "handle-add:actions",
-            "name": "handle-add:actions",
-            "description": "Defines a series of actions (steps)\nthat deal with adding models to the view."
-        },
-        {
-            "displayName": "handle-remove",
-            "name": "handle-remove",
-            "description": "Defines the event handler for 'remove' events on the collection."
-        },
-        {
-            "displayName": "handle-remove:actions",
-            "name": "handle-remove:actions",
-            "description": "Defines a series of actions (steps)\nthat deal with removing models from the view."
-        },
-        {
-            "displayName": "handle-reset",
-            "name": "handle-reset",
-            "description": "Defines the event handler for 'reset' events on the collection."
-        },
-        {
-            "displayName": "handle-reset:actions",
-            "name": "handle-reset:actions",
-            "description": "Defines a series of actions (steps)\nthat deal with resetting models to the view."
-        },
-        {
-            "displayName": "handle-resort",
-            "name": "handle-resort",
-            "description": "Defines the event handler for 'resort' events on the collection."
-        },
-        {
-            "displayName": "handle-resort:actions",
-            "name": "handle-resort:actions",
-            "description": "Defines a series of actions (steps)\nthat deal with resorting models of the view."
         },
         {
             "displayName": "item",

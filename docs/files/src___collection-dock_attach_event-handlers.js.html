@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/__collection-dock/attach/handle-add/actions.js - collection-dock</title>
+    <title>src/__collection-dock/attach/event-handlers.js - collection-dock</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -49,27 +49,11 @@
             
                 <li><a href="../modules/attach.html">attach</a></li>
             
-                <li><a href="../modules/attach.exec.html">attach.exec</a></li>
-            
                 <li><a href="../modules/attach.initialize.html">attach.initialize</a></li>
             
                 <li><a href="../modules/collection-dock.html">collection-dock</a></li>
             
-                <li><a href="../modules/handle-add.html">handle-add</a></li>
-            
-                <li><a href="../modules/handle-add:actions.html">handle-add:actions</a></li>
-            
-                <li><a href="../modules/handle-remove.html">handle-remove</a></li>
-            
-                <li><a href="../modules/handle-remove:actions.html">handle-remove:actions</a></li>
-            
-                <li><a href="../modules/handle-reset.html">handle-reset</a></li>
-            
-                <li><a href="../modules/handle-reset:actions.html">handle-reset:actions</a></li>
-            
-                <li><a href="../modules/handle-resort.html">handle-resort</a></li>
-            
-                <li><a href="../modules/handle-resort:actions.html">handle-resort:actions</a></li>
+                <li><a href="../modules/event-hanlders.html">event-hanlders</a></li>
             
                 <li><a href="../modules/item.html">item</a></li>
             
@@ -110,16 +94,15 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/__collection-dock/attach/handle-add/actions.js</h1>
+                        <h1 class="file-heading">File: src/__collection-dock/attach/event-handlers.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * Defines a series of actions (steps)
- * that deal with adding models to the view.
+ * Defines the event handler for &#x27;add&#x27; events on the collection.
  *
  * @module collection-dock
- * @submodule handle-add:actions
+ * @submodule event-hanlders
  */
 define(function (require, exports, module) {
 	&#x27;use strict&#x27;;
@@ -129,64 +112,77 @@ define(function (require, exports, module) {
 		$ = require(&#x27;jquery&#x27;);
 
 	/**
-	 * Step in which the placeholder is put into place.
+	 * Handles add events on the collection.
 	 *
-	 * @method place
+	 * @method handleAdd
+	 * @private
 	 * @param model {model Object}
-	 * @param $placeholder {jq Object}
 	 */
-	exports.place = function place(model, $placeholder) {
-	//	console.log(&#x27;place&#x27;)
-		var index = this.collection.indexOf(model),
-			$beforeIndex = this.$container.children().eq(index - 1);
+	exports.handleAdd = function handleAdd(model) {
 
-		if ($beforeIndex.length &gt; 0) {
-			$beforeIndex.after($placeholder);
-		} else {
-			this.$container.append($placeholder);
+		// [1] $item
+		var itemHtml = _.isString(this.itemHtml) ? this.itemHtml : this.itemHtml(model.attributes),
+			$item = $(itemHtml);
+
+		// [2] placeItemHtml
+		// [2.1] get index
+		var at = this.collection.indexOf(model);
+		this.placeItemHtml(at, $item);
+
+		// [3] instantiate the itemView
+		// [3.1] instantiate
+		var view = this.itemView({
+			model: model,
+			$el: $item
+		});
+
+		// [3.2] store
+		this.itemViewInstance(model, view);
+	};
+
+	/**
+	 * Handles remove events on the collection.
+	 *
+	 * @method handleRemove
+	 * @private
+	 * @param model {model Object}
+	 */
+	exports.handleRemove = function handleRemove(model) {
+		// retrieve the item view.
+		var view = this.itemViewInstance(model);
+
+		if (view) {
+			view.remove();
 		}
 	};
 
 	/**
-	 * Action run before the item is placed.
-	 * Return promise if you need async functionality.
+	 * Handles reset events on the collection.
 	 *
-	 * @method beforeAdd
+	 * @method handleReset
+	 * @private
 	 * @param model {model Object}
-	 * @param $item {jq Object}
-	 * @param $placeholder {jq Object}
 	 */
-	exports.beforeAdd = function beforeAdd(model, $item, $placeholder) {
+	exports.handleReset = function handleReset(collection, options) {
 
-	//	console.log(&#x27;beforeAdd&#x27;)
-		$item.css(&#x27;opacity&#x27;, 0);
+		// This is just to be faster: remove everything at once!
+		this.$container.html(&#x27;&#x27;);
 
-		return $placeholder.css({ opacity: 0 });
+		this.collection.each(this.handleRemove);
+
+		this.collection.each(this.handleAdd);
 	};
 
-	/**
-	 *
-	 *
-	 * @method add
-	 * @param model
-	 * @param $item
-	 * @param $placeholder
-	 */
-	exports.add = function add(model, $item, $placeholder) {
-	//	console.log(&#x27;add&#x27;)
-		$placeholder.replaceWith($item);
-	};
 
 	/**
+	 * Handles resort events on the collection.
 	 *
-	 *
-	 * @method afterAdd
-	 * @param model
-	 * @param $item
+	 * @method handleResort
+	 * @private
+	 * @param model {model Object}
 	 */
-	exports.afterAdd = function afterAdd(model, $item) {
-	//	console.log(&#x27;afterAdd&#x27;)
-		return $item.animate({ opacity: 1 });
+	exports.handleResort = function handleResort(collection, options) {
+		this.handleReset(collection, $container);
 	};
 
 });

@@ -15,7 +15,7 @@ define(function (require, exports, module) {
 		backbone = require('lowercase-backbone');
 
 	// sub
-	var intiAttach = require('./__collection-dock/attach/initialize');
+	var initAttach = require('./__collection-dock/attach/initialize');
 
 	/**
 	 * @class collectionDock
@@ -45,12 +45,8 @@ define(function (require, exports, module) {
 		}
 
 		// initialize attach
-		intiAttach.call(this);
+		initAttach.call(this);
 	});
 
 	dock.proto(require('./__collection-dock/attach/methods'));
-
-	dock.proto({
-		modelView: require('model-dock'),
-	});
 });

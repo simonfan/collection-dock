@@ -49,27 +49,11 @@
             
                 <li><a href="../modules/attach.html">attach</a></li>
             
-                <li><a href="../modules/attach.exec.html">attach.exec</a></li>
-            
                 <li><a href="../modules/attach.initialize.html">attach.initialize</a></li>
             
                 <li><a href="../modules/collection-dock.html">collection-dock</a></li>
             
-                <li><a href="../modules/handle-add.html">handle-add</a></li>
-            
-                <li><a href="../modules/handle-add:actions.html">handle-add:actions</a></li>
-            
-                <li><a href="../modules/handle-remove.html">handle-remove</a></li>
-            
-                <li><a href="../modules/handle-remove:actions.html">handle-remove:actions</a></li>
-            
-                <li><a href="../modules/handle-reset.html">handle-reset</a></li>
-            
-                <li><a href="../modules/handle-reset:actions.html">handle-reset:actions</a></li>
-            
-                <li><a href="../modules/handle-resort.html">handle-resort</a></li>
-            
-                <li><a href="../modules/handle-resort:actions.html">handle-resort:actions</a></li>
+                <li><a href="../modules/event-hanlders.html">event-hanlders</a></li>
             
                 <li><a href="../modules/item.html">item</a></li>
             
@@ -128,77 +112,56 @@ define(function (require, exports, module) {
 	var _ = require(&#x27;lodash&#x27;);
 
 	/**
-	 * Returns a placeholder for the item.
+	 * Places the $item at a given position within the container.
 	 *
-	 * @method itemPlaceholder
-	 * @param model
+	 * @method placeItemHtml
+	 * @param at {Number}
+	 * @param $item {jq Object}
 	 */
-	exports.itemPlaceholder = function itemPlaceholder(model) {
-		return &#x27;&lt;div&gt;&lt;/div&gt;&#x27;;
-	};
+	exports.placeItemHtml = function placeItemHtml(at, $item) {
 
-	/**
-	 * Returns the data from the model.
-	 *
-	 * @method itemData
-	 * @param model
-	 * @param [done] {Function}
-	 */
-	exports.itemData = function itemData(model) {
-		return model.attributes;
-	};
+		var $beforeIndex = this.$container.children().eq(at - 1);
 
-	/**
-	 * Generate html string given a hash of data.
-	 * Compatible with _.template, and other simple templating tools.
-	 *
-	 * @method itemTemplate
-	 * @param data {Object}
-	 */
-	exports.itemTemplate = function itemTemplate(data) {
-		return &#x27;&lt;div&gt;&lt;/div&gt;&#x27;;
-	};
-
-	/**
-	 * Return a selector string, given the model.
-	 *
-	 * @method itemSelector
-	 * @param model
-	 */
-	exports.itemSelector = function itemSelector(model) {
-		return &#x27;[&#x27; + this.elementTypeAttribute + &#x27;=&quot;item&quot;]&#x27; + &#x27;:eq(&#x27; + this.collection.indexOf(model) + &#x27;)&#x27;;
-	};
-
-	/**
-	 * The attribute name of the &#x27;$el&#x27; type (either &#x27;placeholder&#x27; or &#x27;item&#x27;)
-	 *
-	 * @property elementTypeAttribute
-	 */
-	exports.elementTypeAttribute = &#x27;data-__collection-dock__-type&#x27;;
-
-	/**
-	 * Method that retrieves the $el for a given backbone model.
-	 * Uses the &#x27;itemSelector&#x27; method.
-	 *
-	 * @method retrieve$El
-	 * @param [model]
-	 */
-	exports.retrieve$El = function retrieve$El(model) {
-		var selector;
-
-		if (_.isArray(model)) {
-			// array of models
-
-			selector = _.map(model, _.bind(function (model, index) {
-				return this.itemSelector(model);
-			}, this)).join(&#x27;,&#x27;);
-
+		if ($beforeIndex.length &gt; 0) {
+			$beforeIndex.after($item);
 		} else {
-			// single model
-			selector = this.itemSelector(model);
+			this.$container.append($item);
 		}
+	};
 
-		return this.$container.find(selector);
+	/**
+	 * Either method or property,
+	 * is / returns the html string for the item.
+	 *
+	 * @method itemHtml
+	 * @param model
+	 */
+	exports.itemHtml = &#x27;&lt;div&gt;&lt;/div&gt;&#x27;;
+
+	/**
+	 * Must return an view object with a &#x27;remove&#x27; method.
+	 *
+	 *
+	 */
+	exports.itemView = require(&#x27;model-dock&#x27;);
+
+	/**
+	 * Retrieves OR stores the view that represents a model instance.
+	 *
+	 * @method itemViewInstance
+	 * @param model {Bakcobne Model Object}
+	 * @param [view] {Bakcobne View Object}
+	 */
+	exports.itemViewInstance = function itemViewInstance(model, view) {
+
+		if (arguments.length === 1) {
+			// get
+			return this.itemViews[model.cid];
+
+		} else if (arguments.length === 2) {
+			// store
+			this.itemViews[model.cid] = view;
+		}
 	};
 });
 

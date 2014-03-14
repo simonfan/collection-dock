@@ -49,27 +49,11 @@
             
                 <li><a href="../modules/attach.html">attach</a></li>
             
-                <li><a href="../modules/attach.exec.html">attach.exec</a></li>
-            
                 <li><a href="../modules/attach.initialize.html">attach.initialize</a></li>
             
                 <li><a href="../modules/collection-dock.html">collection-dock</a></li>
             
-                <li><a href="../modules/handle-add.html">handle-add</a></li>
-            
-                <li><a href="../modules/handle-add:actions.html">handle-add:actions</a></li>
-            
-                <li><a href="../modules/handle-remove.html">handle-remove</a></li>
-            
-                <li><a href="../modules/handle-remove:actions.html">handle-remove:actions</a></li>
-            
-                <li><a href="../modules/handle-reset.html">handle-reset</a></li>
-            
-                <li><a href="../modules/handle-reset:actions.html">handle-reset:actions</a></li>
-            
-                <li><a href="../modules/handle-resort.html">handle-resort</a></li>
-            
-                <li><a href="../modules/handle-resort:actions.html">handle-resort:actions</a></li>
+                <li><a href="../modules/event-hanlders.html">event-hanlders</a></li>
             
                 <li><a href="../modules/item.html">item</a></li>
             
@@ -127,8 +111,17 @@ define(function (require, exports, module) {
 	var _ = require(&#x27;lodash&#x27;);
 
 	module.exports = function initializeAttach() {
-		// bind methods
-		_.bindAll(this, &#x27;qExec&#x27;, &#x27;qExecSequence&#x27;);
+
+		// bind event handlers
+		_.bindAll(this, &#x27;handleAdd&#x27;, &#x27;handleRemove&#x27;, &#x27;handleReset&#x27;, &#x27;handleResort&#x27;);
+
+		/**
+		 * Hash on which itemView instances are stored.
+		 *
+		 * @property itemViews
+		 * @type Object
+		 */
+		this.itemViews = {};
 	};
 });
 
