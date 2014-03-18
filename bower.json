@@ -1,7 +1,7 @@
 {
   "name": "collection-dock",
   "main": "built/collection-dock.js",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Some module...",
   "dependencies": {
 	"lodash": "~2.4.1",
@@ -19,8 +19,6 @@
 	"backbone": "~1.1.1"
   },
   "resolutions": {
-	"jquery": "~2.1.0",
-	"jquery.filler": "0.2.2",
-	"model-dock": "0.1.2"
+	"jquery": "~2.1.0"
   }
 }

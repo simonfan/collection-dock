@@ -24,6 +24,9 @@ define(function (require, exports, module) {
 	 */
 	var dock = module.exports = backbone.view.extend(function collectionDock(extensions) {
 
+		// initialize basic view
+		backbone.view.prototype.initialize.apply(this, arguments);
+
 		/**
 		 * The extensions object will be incorporated to the new object.
 		 *

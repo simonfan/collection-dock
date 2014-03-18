@@ -363,7 +363,7 @@
         },
         {
             "file": "src/index.js",
-            "line": 27,
+            "line": 30,
             "description": "The extensions object will be incorporated to the new object.",
             "params": [
                 {
@@ -386,7 +386,7 @@
         },
         {
             "message": "Missing item type\nThe extensions object will be incorporated to the new object.",
-            "line": " src/index.js:27"
+            "line": " src/index.js:30"
         }
     ]
 }

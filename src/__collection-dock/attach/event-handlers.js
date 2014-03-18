@@ -82,7 +82,7 @@ define(function (require, exports, module) {
 	 * @param model {model Object}
 	 */
 	exports.handleResort = function handleResort(collection, options) {
-		this.handleReset(collection, $container);
+		this.handleReset(collection, this.$container);
 	};
 
 });
