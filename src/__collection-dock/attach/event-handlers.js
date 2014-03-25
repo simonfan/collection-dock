@@ -33,6 +33,7 @@ define(function (require, exports, module) {
 		// [3.1] instantiate
 		var view = this.itemView({
 			model: model,
+			el: $item,
 			$el: $item
 		});
 

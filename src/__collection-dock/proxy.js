@@ -18,7 +18,7 @@ define(function (require, exports, module) {
 	};
 
 	// collection methods.
-	var methods = ['get', 'set', 'each'];
+	var methods = ['get', 'set', 'each', 'add'];
 
 	_.each(methods, function (method) {
 		exports[method] = function () {

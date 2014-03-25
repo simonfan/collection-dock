@@ -113,12 +113,43 @@ module.exports = function (grunt) {
 
 					// exclude these modules AND their dependencies
 					// (excluding your bower dependencies)
-					exclude: ["lodash", "subject", "jquery", "backbone", "q", "lowercase-backbone"],
+					exclude: ["model-dock", "lodash", "subject", "jquery", "backbone", "q", "lowercase-backbone"],
 
 					// excludeShallow
 					excludeShallow: [],
 
 					optimize: 'uglify2',
+
+					pragmas: {
+						exclude: true,
+					},
+				}
+			},
+
+			full: {
+				options: {
+					// base url where to look for module files
+					// and relative to which the module paths will be defined
+					// (must coincide with that defined in mainConfigFile)
+					baseUrl: './src',
+					// module name
+					name: 'collection-dock',
+					// output here
+					out: './built/collection-dock.full.js',
+					// config file
+					mainConfigFile: 'amdconfig.js',
+
+					// include these modules
+					include: [],
+
+					// exclude these modules AND their dependencies
+					// (excluding your bower dependencies)
+					exclude: ["model-dock", "lodash", "subject", "jquery", "backbone", "q", "lowercase-backbone"],
+
+					// excludeShallow
+					excludeShallow: [],
+
+					optimize: 'none',
 
 					pragmas: {
 						exclude: true,

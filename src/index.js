@@ -52,4 +52,5 @@ define(function (require, exports, module) {
 	});
 
 	dock.proto(require('./__collection-dock/attach/methods'));
+	dock.proto(require('./__collection-dock/proxy'));
 });

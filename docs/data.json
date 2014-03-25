@@ -192,7 +192,7 @@
         },
         {
             "file": "src/__collection-dock/attach/event-handlers.js",
-            "line": 43,
+            "line": 44,
             "description": "Handles remove events on the collection.",
             "itemtype": "method",
             "name": "handleRemove",
@@ -211,7 +211,7 @@
         },
         {
             "file": "src/__collection-dock/attach/event-handlers.js",
-            "line": 59,
+            "line": 60,
             "description": "Handles reset events on the collection.",
             "itemtype": "method",
             "name": "handleReset",
@@ -230,7 +230,7 @@
         },
         {
             "file": "src/__collection-dock/attach/event-handlers.js",
-            "line": 77,
+            "line": 78,
             "description": "Handles resort events on the collection.",
             "itemtype": "method",
             "name": "handleResort",
