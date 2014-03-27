@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/__collection-dock/attach/methods.js - collection-dock</title>
+    <title>src/__collection-dock/event-handlers.js - collection-dock</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -49,8 +49,6 @@
             
                 <li><a href="../modules/attach.html">attach</a></li>
             
-                <li><a href="../modules/attach.initialize.html">attach.initialize</a></li>
-            
                 <li><a href="../modules/collection-dock.html">collection-dock</a></li>
             
                 <li><a href="../modules/event-hanlders.html">event-hanlders</a></li>
@@ -94,80 +92,85 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/__collection-dock/attach/methods.js</h1>
+                        <h1 class="file-heading">File: src/__collection-dock/event-handlers.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * Defines methods that will be available
- * on dock instances.
+ * Defines the event handler for &#x27;add&#x27; events on the collection.
  *
  * @module collection-dock
- * @submodule attach
+ * @submodule event-hanlders
  */
 define(function (require, exports, module) {
 	&#x27;use strict&#x27;;
 
 	// external
-	var _ = require(&#x27;lodash&#x27;);
+	var _ = require(&#x27;lodash&#x27;),
+		$ = require(&#x27;jquery&#x27;),
+		q = require(&#x27;q&#x27;);
 
 	/**
-	 * event that indicates that the collection was completely
-	 * reordered.
-	 */
-	exports.resortEvent = &#x27;resort&#x27;;
-
-	/**
-	 * Attaches a given Backbone collection to the data dock.
-	 * basically detaches the previous collection and sets new listeners.
+	 * Handles add events on the collection.
 	 *
-	 * @method attach
-	 * @param collection
+	 * @method handleAdd
+	 * @private
+	 * @param model {model Object}
 	 */
-	exports.attach = function attach(collection) {
+	exports.handleAdd = function handleAdd(model) {
+		// [1] instantiate the itemView
+		var view = this.buildItemView({
+			model: model,
+		});
 
-		// [1] detach
-		this.detach();
-
-		// [2] change collection
-		this.collection = collection;
-
-		// [3] events
-		collection
-			.on(&#x27;add&#x27;, this.handleAdd)
-			.on(&#x27;remove&#x27;, this.handleRemove)
-			.on(&#x27;reset&#x27;, this.handleReset)
-			.on(this.resortEvent, this.handleResort);
-
-		// [4] start.
-		this.handleReset(collection);
+		// [2] store
+		this.storeView(model, view);
 	};
 
-
 	/**
-	 * Detaches the collection from the dock.
-	 * Basically removes listeners.
+	 * Handles remove events on the collection.
 	 *
-	 * @method detach
+	 * @method handleRemove
+	 * @private
+	 * @param model {model Object}
 	 */
-	exports.detach = function detach() {
+	exports.handleRemove = function handleRemove(model, index) {
+		var view = this.getView(model);
 
-		if (this.collection) {
-			this.collection
-				.off(&#x27;add&#x27;, void(0), this)
-				.off(&#x27;remove&#x27;, void(0), this)
-				.off(&#x27;reset&#x27;, void(0), this)
-				.off(this.resortEvent, void(0), this);
+		if (view) {
+			view.remove();
 		}
-
-		this.$container.html(&#x27;&#x27;);
 	};
 
-	// item-related
-	_.extend(exports, require(&#x27;./item&#x27;));
+	/**
+	 * Handles reset events on the collection.
+	 *
+	 * @method handleReset
+	 * @private
+	 * @param model {model Object}
+	 */
+	exports.handleReset = function handleReset(collection, options) {
 
-	// event-handlers
-	_.extend(exports, require(&#x27;./event-handlers&#x27;));
+		// This is just to be faster: remove everything at once!
+		this.$container.html(&#x27;&#x27;);
+
+		this.collection.each(this.handleRemove);
+
+		this.collection.each(this.handleAdd);
+	};
+
+
+	/**
+	 * Handles resort events on the collection.
+	 *
+	 * @method handleResort
+	 * @private
+	 * @param model {model Object}
+	 */
+	exports.handleResort = function handleResort(collection, options) {
+		this.handleReset(collection, this.$container);
+	};
+
 });
 
     </pre>

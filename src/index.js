@@ -14,9 +14,6 @@ define(function (require, exports, module) {
 	var _ = require('lodash'),
 		backbone = require('lowercase-backbone');
 
-	// sub
-	var initAttach = require('./__collection-dock/attach/initialize');
-
 	/**
 	 * @class collectionDock
 	 * @constructor
@@ -47,10 +44,23 @@ define(function (require, exports, module) {
 			this.$container = this.$el;
 		}
 
-		// initialize attach
-		initAttach.call(this);
+
+		// bind event handlers
+		_.bindAll(this, 'handleAdd', 'handleRemove', 'handleReset', 'handleResort');
+
+		/**
+		 * Hash on which itemView instances are stored, keyed by model CID
+		 *
+		 * @property itemViews
+		 * @type Objects
+		 */
+		this.itemViews = {};
 	});
 
-	dock.proto(require('./__collection-dock/attach/methods'));
-	dock.proto(require('./__collection-dock/proxy'));
+	dock.proto(require('./__collection-dock/attach'));
+	dock.proto(require('./__collection-dock/views-proxy'));
+
+
+	dock.proto(require('./__collection-dock/event-handlers'));
+	dock.proto(require('./__collection-dock/item/methods'));
 });

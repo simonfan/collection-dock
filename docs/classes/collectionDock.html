@@ -49,8 +49,6 @@
             
                 <li><a href="../modules/attach.html">attach</a></li>
             
-                <li><a href="../modules/attach.initialize.html">attach.initialize</a></li>
-            
                 <li><a href="../modules/collection-dock.html">collection-dock</a></li>
             
                 <li><a href="../modules/event-hanlders.html">event-hanlders</a></li>
@@ -102,7 +100,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/src_index.js.html#l20"><code>src&#x2F;index.js:20</code></a>
+            Defined in: <a href="../files/src_index.js.html#l17"><code>src&#x2F;index.js:17</code></a>
         </div>
     
 
@@ -166,7 +164,7 @@
             
         
         
-        <a href="../files/src_index.js.html#l20"><code>src&#x2F;index.js:20</code></a>
+        <a href="../files/src_index.js.html#l17"><code>src&#x2F;index.js:17</code></a>
         
         </p>
 
@@ -238,6 +236,13 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
+                                <a href="#method_at">at</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_attach">attach</a>
 
                                 
@@ -245,7 +250,28 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_buildItemView">buildItemView</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_detach">detach</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getView">getView</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getView">getView</a>
 
                                 
                                 
@@ -280,21 +306,28 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_itemHtml">itemHtml</a>
+                                <a href="#method_initialize">initialize</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_itemViewInstance">itemViewInstance</a>
+                                <a href="#method_remove">remove</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_placeItemHtml">placeItemHtml</a>
+                                <a href="#method_render">render</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_store">store</a>
 
                                 
                                 
@@ -329,6 +362,96 @@
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_at" class="method item">
+    <h3 class="name"><code>at</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>index</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/item.html">item</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src___collection-dock_item_methods.js.html#l42"><code>src&#x2F;__collection-dock&#x2F;item&#x2F;methods.js:42</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Retrieves the view object at a given index.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">index</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="method_attach" class="method item">
@@ -375,7 +498,7 @@
             
         
         
-        <a href="../files/src___collection-dock_attach_methods.js.html#l20"><code>src&#x2F;__collection-dock&#x2F;attach&#x2F;methods.js:20</code></a>
+        <a href="../files/src___collection-dock_attach.js.html#l20"><code>src&#x2F;__collection-dock&#x2F;attach.js:20</code></a>
         
         </p>
 
@@ -400,6 +523,96 @@ basically detaches the previous collection and sets new listeners.</p>
                 <li class="param">
                     
                         <code class="param-name">collection</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_buildItemView" class="method item">
+    <h3 class="name"><code>buildItemView</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/item.html">item</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src___collection-dock_item_methods.js.html#l15"><code>src&#x2F;__collection-dock&#x2F;item&#x2F;methods.js:15</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Builds the itemvieW.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
                         <span class="type">Object</span>
                     
 
@@ -456,7 +669,7 @@ basically detaches the previous collection and sets new listeners.</p>
             
         
         
-        <a href="../files/src___collection-dock_attach_methods.js.html#l47"><code>src&#x2F;__collection-dock&#x2F;attach&#x2F;methods.js:47</code></a>
+        <a href="../files/src___collection-dock_attach.js.html#l47"><code>src&#x2F;__collection-dock&#x2F;attach.js:47</code></a>
         
         </p>
 
@@ -472,6 +685,186 @@ Basically removes listeners.</p>
 
     </div>
 
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getView" class="method item">
+    <h3 class="name"><code>getView</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>modelCid</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/item.html">item</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src___collection-dock_item_methods.js.html#l72"><code>src&#x2F;__collection-dock&#x2F;item&#x2F;methods.js:72</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Retrieves the view for a given model/modelCid</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">modelCid</code>
+                        <span class="type">Number | Backbone Model</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getView" class="method item">
+    <h3 class="name"><code>getView</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>modelCid</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/item.html">item</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src___collection-dock_item_methods.js.html#l84"><code>src&#x2F;__collection-dock&#x2F;item&#x2F;methods.js:84</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Deletes the view for a given model/modelCid from the itemViews hash.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">modelCid</code>
+                        <span class="type">Number | Backbone Model</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -526,7 +919,7 @@ Basically removes listeners.</p>
             
         
         
-        <a href="../files/src___collection-dock_attach_event-handlers.js.html#l14"><code>src&#x2F;__collection-dock&#x2F;attach&#x2F;event-handlers.js:14</code></a>
+        <a href="../files/src___collection-dock_event-handlers.js.html#l15"><code>src&#x2F;__collection-dock&#x2F;event-handlers.js:15</code></a>
         
         </p>
 
@@ -618,7 +1011,7 @@ Basically removes listeners.</p>
             
         
         
-        <a href="../files/src___collection-dock_attach_event-handlers.js.html#l44"><code>src&#x2F;__collection-dock&#x2F;attach&#x2F;event-handlers.js:44</code></a>
+        <a href="../files/src___collection-dock_event-handlers.js.html#l32"><code>src&#x2F;__collection-dock&#x2F;event-handlers.js:32</code></a>
         
         </p>
 
@@ -710,7 +1103,7 @@ Basically removes listeners.</p>
             
         
         
-        <a href="../files/src___collection-dock_attach_event-handlers.js.html#l60"><code>src&#x2F;__collection-dock&#x2F;attach&#x2F;event-handlers.js:60</code></a>
+        <a href="../files/src___collection-dock_event-handlers.js.html#l47"><code>src&#x2F;__collection-dock&#x2F;event-handlers.js:47</code></a>
         
         </p>
 
@@ -802,7 +1195,7 @@ Basically removes listeners.</p>
             
         
         
-        <a href="../files/src___collection-dock_attach_event-handlers.js.html#l78"><code>src&#x2F;__collection-dock&#x2F;attach&#x2F;event-handlers.js:78</code></a>
+        <a href="../files/src___collection-dock_event-handlers.js.html#l65"><code>src&#x2F;__collection-dock&#x2F;event-handlers.js:65</code></a>
         
         </p>
 
@@ -848,8 +1241,8 @@ Basically removes listeners.</p>
 </div>
 
                 
-                    <div id="method_itemHtml" class="method item">
-    <h3 class="name"><code>itemHtml</code></h3>
+                    <div id="method_initialize" class="method item">
+    <h3 class="name"><code>initialize</code></h3>
 
     
         <div class="args">
@@ -857,7 +1250,7 @@ Basically removes listeners.</p>
             
                 <li class="arg">
                     
-                        <code>model</code>
+                        <code>options</code>
                     
                 </li>
             
@@ -883,8 +1276,6 @@ Basically removes listeners.</p>
         
             
                 
-                    <p>Provided by the <a href="../modules/item.html">item</a> module.</p>
-                
                 <p>
                 
                 Defined in
@@ -892,7 +1283,7 @@ Basically removes listeners.</p>
             
         
         
-        <a href="../files/src___collection-dock_attach_item.js.html#l32"><code>src&#x2F;__collection-dock&#x2F;attach&#x2F;item.js:32</code></a>
+        <a href="../files/src___collection-dock_item_view.js.html#l8"><code>src&#x2F;__collection-dock&#x2F;item&#x2F;view.js:8</code></a>
         
         </p>
 
@@ -903,8 +1294,7 @@ Basically removes listeners.</p>
     </div>
 
     <div class="description">
-        <p>Either method or property,
-is / returns the html string for the item.</p>
+        <p>Saves reference to the collectionView</p>
 
     </div>
 
@@ -916,7 +1306,7 @@ is / returns the html string for the item.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">model</code>
+                        <code class="param-name">options</code>
                         <span class="type">Object</span>
                     
 
@@ -939,27 +1329,11 @@ is / returns the html string for the item.</p>
 </div>
 
                 
-                    <div id="method_itemViewInstance" class="method item">
-    <h3 class="name"><code>itemViewInstance</code></h3>
+                    <div id="method_remove" class="method item">
+    <h3 class="name"><code>remove</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>model</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code class="optional">[view]</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
@@ -980,8 +1354,6 @@ is / returns the html string for the item.</p>
         
             
                 
-                    <p>Provided by the <a href="../modules/item.html">item</a> module.</p>
-                
                 <p>
                 
                 Defined in
@@ -989,7 +1361,7 @@ is / returns the html string for the item.</p>
             
         
         
-        <a href="../files/src___collection-dock_attach_item.js.html#l48"><code>src&#x2F;__collection-dock&#x2F;attach&#x2F;item.js:48</code></a>
+        <a href="../files/src___collection-dock_item_view.js.html#l56"><code>src&#x2F;__collection-dock&#x2F;item&#x2F;view.js:56</code></a>
         
         </p>
 
@@ -1000,49 +1372,11 @@ is / returns the html string for the item.</p>
     </div>
 
     <div class="description">
-        <p>Retrieves OR stores the view that represents a model instance.</p>
+        <p>Intercepts the default remove method, so
+that we can make sure the item is also removed from the collectionView&#39;s hash</p>
 
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">model</code>
-                        <span class="type">Bakcobne Model Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[view]</code>
-                        <span class="type">Bakcobne View Object</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -1051,8 +1385,65 @@ is / returns the html string for the item.</p>
 </div>
 
                 
-                    <div id="method_placeItemHtml" class="method item">
-    <h3 class="name"><code>placeItemHtml</code></h3>
+                    <div id="method_render" class="method item">
+    <h3 class="name"><code>render</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src___collection-dock_item_view.js.html#l26"><code>src&#x2F;__collection-dock&#x2F;item&#x2F;view.js:26</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>This method is invoked by modelDock.prototype.initialize,
+as the modelDock requires the html to be ready before
+attachment intialization.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_store" class="method item">
+    <h3 class="name"><code>store</code></h3>
 
     
         <div class="args">
@@ -1060,13 +1451,13 @@ is / returns the html string for the item.</p>
             
                 <li class="arg">
                     
-                        <code>at</code>
+                        <code>modelCid</code>
                     
                 </li>
             
                 <li class="arg">
                     
-                        <code>$item</code>
+                        <code>view</code>
                     
                 </li>
             
@@ -1101,7 +1492,7 @@ is / returns the html string for the item.</p>
             
         
         
-        <a href="../files/src___collection-dock_attach_item.js.html#l14"><code>src&#x2F;__collection-dock&#x2F;attach&#x2F;item.js:14</code></a>
+        <a href="../files/src___collection-dock_item_methods.js.html#l56"><code>src&#x2F;__collection-dock&#x2F;item&#x2F;methods.js:56</code></a>
         
         </p>
 
@@ -1112,7 +1503,7 @@ is / returns the html string for the item.</p>
     </div>
 
     <div class="description">
-        <p>Places the $item at a given position within the container.</p>
+        <p>Stores the view at a given modelCid.</p>
 
     </div>
 
@@ -1124,8 +1515,8 @@ is / returns the html string for the item.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">at</code>
-                        <span class="type">Number</span>
+                        <code class="param-name">modelCid</code>
+                        <span class="type">Number | Backbone Model</span>
                     
 
                     
@@ -1139,8 +1530,8 @@ is / returns the html string for the item.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">$item</code>
-                        <span class="type">Jq Object</span>
+                        <code class="param-name">view</code>
+                        <span class="type">Backbone View</span>
                     
 
                     
@@ -1172,7 +1563,7 @@ is / returns the html string for the item.</p>
                 
                     <div id="property_itemViews" class="property item">
     <h3 class="name"><code>itemViews</code></h3>
-    <span class="type">Object</span>
+    <span class="type">Objects</span>
 
     
 
@@ -1186,8 +1577,6 @@ is / returns the html string for the item.</p>
         
             
                 
-                    <p>Provided by the <a href="../modules/attach.initialize.html">attach.initialize</a> module.</p>
-                
                 <p>
                 
                 Defined in
@@ -1195,7 +1584,7 @@ is / returns the html string for the item.</p>
             
         
         
-        <a href="../files/src___collection-dock_attach_initialize.js.html#l18"><code>src&#x2F;__collection-dock&#x2F;attach&#x2F;initialize.js:18</code></a>
+        <a href="../files/src_index.js.html#l51"><code>src&#x2F;index.js:51</code></a>
         
         </p>
 
@@ -1205,7 +1594,7 @@ is / returns the html string for the item.</p>
     </div>
 
     <div class="description">
-        <p>Hash on which itemView instances are stored.</p>
+        <p>Hash on which itemView instances are stored, keyed by model CID</p>
 
     </div>
 

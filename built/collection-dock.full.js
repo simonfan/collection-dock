@@ -1,196 +1,12 @@
 
 /**
- * Initialization logic for attach.
- *
- * @module collection-dock
- * @submodule attach.initialize
- */
-define('__collection-dock/attach/initialize',['require','exports','module','lodash'],function (require, exports, module) {
-	
-
-	// external
-	var _ = require('lodash');
-
-	module.exports = function initializeAttach() {
-
-		// bind event handlers
-		_.bindAll(this, 'handleAdd', 'handleRemove', 'handleReset', 'handleResort');
-
-		/**
-		 * Hash on which itemView instances are stored.
-		 *
-		 * @property itemViews
-		 * @type Object
-		 */
-		this.itemViews = {};
-	};
-});
-
-/**
- * Defines methods that generate item-related templates and data.
- * Methods here should be overwritten for custom behaviour.
- *
- * @module collection-dock
- * @submodule item
- */
-define('__collection-dock/attach/item',['require','exports','module','lodash','model-dock'],function (require, exports, module) {
-	
-
-	// external
-	var _ = require('lodash');
-
-	/**
-	 * Places the $item at a given position within the container.
-	 *
-	 * @method placeItemHtml
-	 * @param at {Number}
-	 * @param $item {jq Object}
-	 */
-	exports.placeItemHtml = function placeItemHtml(at, $item) {
-
-		var $beforeIndex = this.$container.children().eq(at - 1);
-
-		if ($beforeIndex.length > 0) {
-			$beforeIndex.after($item);
-		} else {
-			this.$container.append($item);
-		}
-	};
-
-	/**
-	 * Either method or property,
-	 * is / returns the html string for the item.
-	 *
-	 * @method itemHtml
-	 * @param model
-	 */
-	exports.itemHtml = '<div></div>';
-
-	/**
-	 * Must return an view object with a 'remove' method.
-	 *
-	 *
-	 */
-	exports.itemView = require('model-dock');
-
-	/**
-	 * Retrieves OR stores the view that represents a model instance.
-	 *
-	 * @method itemViewInstance
-	 * @param model {Bakcobne Model Object}
-	 * @param [view] {Bakcobne View Object}
-	 */
-	exports.itemViewInstance = function itemViewInstance(model, view) {
-
-		if (arguments.length === 1) {
-			// get
-			return this.itemViews[model.cid];
-
-		} else if (arguments.length === 2) {
-			// store
-			this.itemViews[model.cid] = view;
-		}
-	};
-});
-
-/**
- * Defines the event handler for 'add' events on the collection.
- *
- * @module collection-dock
- * @submodule event-hanlders
- */
-define('__collection-dock/attach/event-handlers',['require','exports','module','lodash','jquery'],function (require, exports, module) {
-	
-
-	// external
-	var _ = require('lodash'),
-		$ = require('jquery');
-
-	/**
-	 * Handles add events on the collection.
-	 *
-	 * @method handleAdd
-	 * @private
-	 * @param model {model Object}
-	 */
-	exports.handleAdd = function handleAdd(model) {
-
-		// [1] $item
-		var itemHtml = _.isString(this.itemHtml) ? this.itemHtml : this.itemHtml(model.attributes),
-			$item = $(itemHtml);
-
-		// [2] placeItemHtml
-		// [2.1] get index
-		var at = this.collection.indexOf(model);
-		this.placeItemHtml(at, $item);
-
-		// [3] instantiate the itemView
-		// [3.1] instantiate
-		var view = this.itemView({
-			model: model,
-			el: $item,
-			$el: $item
-		});
-
-		// [3.2] store
-		this.itemViewInstance(model, view);
-	};
-
-	/**
-	 * Handles remove events on the collection.
-	 *
-	 * @method handleRemove
-	 * @private
-	 * @param model {model Object}
-	 */
-	exports.handleRemove = function handleRemove(model) {
-		// retrieve the item view.
-		var view = this.itemViewInstance(model);
-
-		if (view) {
-			view.remove();
-		}
-	};
-
-	/**
-	 * Handles reset events on the collection.
-	 *
-	 * @method handleReset
-	 * @private
-	 * @param model {model Object}
-	 */
-	exports.handleReset = function handleReset(collection, options) {
-
-		// This is just to be faster: remove everything at once!
-		this.$container.html('');
-
-		this.collection.each(this.handleRemove);
-
-		this.collection.each(this.handleAdd);
-	};
-
-
-	/**
-	 * Handles resort events on the collection.
-	 *
-	 * @method handleResort
-	 * @private
-	 * @param model {model Object}
-	 */
-	exports.handleResort = function handleResort(collection, options) {
-		this.handleReset(collection, this.$container);
-	};
-
-});
-
-/**
  * Defines methods that will be available
  * on dock instances.
  *
  * @module collection-dock
  * @submodule attach
  */
-define('__collection-dock/attach/methods',['require','exports','module','lodash','./item','./event-handlers'],function (require, exports, module) {
+define('__collection-dock/attach',['require','exports','module','lodash'],function (require, exports, module) {
 	
 
 	// external
@@ -247,12 +63,6 @@ define('__collection-dock/attach/methods',['require','exports','module','lodash'
 
 		this.$container.html('');
 	};
-
-	// item-related
-	_.extend(exports, require('./item'));
-
-	// event-handlers
-	_.extend(exports, require('./event-handlers'));
 });
 
 /**
@@ -261,27 +71,268 @@ define('__collection-dock/attach/methods',['require','exports','module','lodash'
  * @module collection-dock
  * @submodule proxy
  */
-define('__collection-dock/proxy',['require','exports','module','lodash'],function (require, exports, module) {
+define('__collection-dock/views-proxy',['require','exports','module','lodash'],function (require, exports, module) {
 	
 
 	var _ = require('lodash');
 
-	exports.proxyMethod = function proxyMethod(method, args) {
-		var collection = this.collection;
+	// events
+	exports.on = function onViews() {
+		var args = Array.prototype.slice.call(arguments);
 
-		if (collection) {
-			return collection[method].apply(collection, args);
+		_.each(this.itemViews, function (view) {
+			view.on.apply(view, args);
+		});
+
+		return this;
+	};
+});
+
+/**
+ * Defines the event handler for 'add' events on the collection.
+ *
+ * @module collection-dock
+ * @submodule event-hanlders
+ */
+define('__collection-dock/event-handlers',['require','exports','module','lodash','jquery','q'],function (require, exports, module) {
+	
+
+	// external
+	var _ = require('lodash'),
+		$ = require('jquery'),
+		q = require('q');
+
+	/**
+	 * Handles add events on the collection.
+	 *
+	 * @method handleAdd
+	 * @private
+	 * @param model {model Object}
+	 */
+	exports.handleAdd = function handleAdd(model) {
+		// [1] instantiate the itemView
+		var view = this.buildItemView({
+			model: model,
+		});
+
+		// [2] store
+		this.storeView(model, view);
+	};
+
+	/**
+	 * Handles remove events on the collection.
+	 *
+	 * @method handleRemove
+	 * @private
+	 * @param model {model Object}
+	 */
+	exports.handleRemove = function handleRemove(model, index) {
+		var view = this.getView(model);
+
+		if (view) {
+			view.remove();
 		}
 	};
 
-	// collection methods.
-	var methods = ['get', 'set', 'each', 'add'];
+	/**
+	 * Handles reset events on the collection.
+	 *
+	 * @method handleReset
+	 * @private
+	 * @param model {model Object}
+	 */
+	exports.handleReset = function handleReset(collection, options) {
 
-	_.each(methods, function (method) {
-		exports[method] = function () {
-			return this.proxyMethod(method, arguments);
-		};
+		// This is just to be faster: remove everything at once!
+		this.$container.html('');
+
+		this.collection.each(this.handleRemove);
+
+		this.collection.each(this.handleAdd);
+	};
+
+
+	/**
+	 * Handles resort events on the collection.
+	 *
+	 * @method handleResort
+	 * @private
+	 * @param model {model Object}
+	 */
+	exports.handleResort = function handleResort(collection, options) {
+		this.handleReset(collection, this.$container);
+	};
+
+});
+
+define('__collection-dock/item/view',['require','exports','module','model-dock','jquery'],function (require, exports, module) {
+
+	var modelDock = require('model-dock'),
+		$ = require('jquery');
+
+	module.exports = modelDock.extend({
+
+		/**
+		 * Saves reference to the collectionView
+		 *
+		 * @method initialize
+		 * @param options {Object}
+		 */
+		initialize: function initializeCollectionItemView(options) {
+			// save reference to collectionView
+			// this must be done before modelDock.initialize,
+			// as the render method requires the collectionView object.
+			this.collectionView = options.collectionView;
+
+			modelDock.prototype.initialize.apply(this, arguments);
+		},
+
+
+		html: '<div></div>',
+
+		/**
+		 * This method is invoked by modelDock.prototype.initialize,
+		 * as the modelDock requires the html to be ready before
+		 * attachment intialization.
+		 *
+		 * @method render
+		 */
+		render: function render() {
+			// get the position at which this model is.
+			var index = this.collectionView.collection.indexOf(this.model);
+
+			// build the $el.
+			this.$el = $(this.html);
+
+			// get the view that represents the model before this one.
+			var viewBefore = this.collectionView.getViewAt(index - 1);
+
+			if (viewBefore) {
+				// if htere is a view before,
+				// insert this.$el after that view's $el
+				this.$el.insertAfter(viewBefore.$el);
+
+			} else {
+				// otherwise, the collectionView is still empty,
+				// thus just append to the container
+				this.$el.appendTo(this.collectionView.$container);
+
+			}
+		},
+
+		/**
+		 * Intercepts the default remove method, so
+		 * that we can make sure the item is also removed from the collectionView's hash
+		 *
+		 * @method remove
+		 */
+		remove: function removeCollectionItemView() {
+
+			// remove itself from collection view
+			this.collectionView.removeView(this.model.cid);
+
+			modelDock.prototype.remove.apply(this, arguments);
+		},
 	});
+});
+
+/**
+ * Defines methods that generate item-related templates and data.
+ * Methods here should be overwritten for custom behaviour.
+ *
+ * @module collection-dock
+ * @submodule item
+ */
+define('__collection-dock/item/methods',['require','exports','module','lodash','q','./view'],function (require, exports, module) {
+	
+
+	// external
+	var _ = require('lodash'),
+		q = require('q');
+
+	/**
+	 * Builds the itemvieW.
+	 *
+	 * @method buildItemView
+	 * @param options {Object}
+	 */
+	exports.buildItemView = function buildItemView(options) {
+
+		// reference to the collectionView
+		options.collectionView = this;
+
+		return this.itemView(options);
+	};
+
+	/**
+	 * Must return an view object with a 'remove' method.
+	 *
+	 *
+	 */
+	exports.itemView = require('./view');
+
+
+
+	// STORAGE
+
+	// by index
+
+	/**
+	 * Retrieves the view object at a given index.
+	 *
+	 * @method at
+	 * @param index {Number}
+	 */
+	exports.getViewAt = function getViewAt(index) {
+		if (index >= 0) {
+			var model = this.collection.at(index);
+
+			return this.getView(model.cid);
+		}
+	};
+
+	/**
+	 * Stores the view at a given modelCid.
+	 *
+	 * @method store
+	 * @param modelCid {Number|Backbone Model}
+	 * @param view {Backbone View}
+	 */
+	exports.storeView = function storeView(modelCid, view) {
+		// if modelCid is an object, it must be the model itself.
+		modelCid = _.isObject(modelCid) ? modelCid.cid : modelCid;
+
+		this.itemViews[modelCid] = view;
+
+		return this;
+	};
+
+	/**
+	 * Retrieves the view for a given model/modelCid
+	 *
+	 * @method getView
+	 * @param modelCid {Number|Backbone Model}
+	 */
+	exports.getView = function getView(modelCid) {
+		// if modelCid is an object, it must be the model itself.
+		modelCid = _.isObject(modelCid) ? modelCid.cid : modelCid;
+
+		return this.itemViews[modelCid];
+	};
+	/**
+	 * Deletes the view for a given model/modelCid from the itemViews hash.
+	 *
+	 * @method getView
+	 * @param modelCid {Number|Backbone Model}
+	 */
+	exports.removeView = function removeView(modelCid) {
+		// if modelCid is an object, it must be the model itself.
+		modelCid = _.isObject(modelCid) ? modelCid.cid : modelCid;
+		delete this.itemViews[modelCid];
+
+		return this;
+	};
+
 });
 
 //     collection-dock
@@ -294,14 +345,11 @@ define('__collection-dock/proxy',['require','exports','module','lodash'],functio
  * @module collection-dock
  */
 
-define('collection-dock',['require','exports','module','lodash','lowercase-backbone','./__collection-dock/attach/initialize','./__collection-dock/attach/methods','./__collection-dock/proxy'],function (require, exports, module) {
+define('collection-dock',['require','exports','module','lodash','lowercase-backbone','./__collection-dock/attach','./__collection-dock/views-proxy','./__collection-dock/event-handlers','./__collection-dock/item/methods'],function (require, exports, module) {
 	
 
 	var _ = require('lodash'),
 		backbone = require('lowercase-backbone');
-
-	// sub
-	var initAttach = require('./__collection-dock/attach/initialize');
 
 	/**
 	 * @class collectionDock
@@ -333,10 +381,23 @@ define('collection-dock',['require','exports','module','lodash','lowercase-backb
 			this.$container = this.$el;
 		}
 
-		// initialize attach
-		initAttach.call(this);
+
+		// bind event handlers
+		_.bindAll(this, 'handleAdd', 'handleRemove', 'handleReset', 'handleResort');
+
+		/**
+		 * Hash on which itemView instances are stored, keyed by model CID
+		 *
+		 * @property itemViews
+		 * @type Objects
+		 */
+		this.itemViews = {};
 	});
 
-	dock.proto(require('./__collection-dock/attach/methods'));
-	dock.proto(require('./__collection-dock/proxy'));
+	dock.proto(require('./__collection-dock/attach'));
+	dock.proto(require('./__collection-dock/views-proxy'));
+
+
+	dock.proto(require('./__collection-dock/event-handlers'));
+	dock.proto(require('./__collection-dock/item/methods'));
 });

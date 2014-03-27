@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/__collection-dock/attach/initialize.js - collection-dock</title>
+    <title>src/__collection-dock/item/view.js - collection-dock</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -49,8 +49,6 @@
             
                 <li><a href="../modules/attach.html">attach</a></li>
             
-                <li><a href="../modules/attach.initialize.html">attach.initialize</a></li>
-            
                 <li><a href="../modules/collection-dock.html">collection-dock</a></li>
             
                 <li><a href="../modules/event-hanlders.html">event-hanlders</a></li>
@@ -94,35 +92,79 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/__collection-dock/attach/initialize.js</h1>
+                        <h1 class="file-heading">File: src/__collection-dock/item/view.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/**
- * Initialization logic for attach.
- *
- * @module collection-dock
- * @submodule attach.initialize
- */
 define(function (require, exports, module) {
-	&#x27;use strict&#x27;;
 
-	// external
-	var _ = require(&#x27;lodash&#x27;);
+	var modelDock = require(&#x27;model-dock&#x27;),
+		$ = require(&#x27;jquery&#x27;);
 
-	module.exports = function initializeAttach() {
-
-		// bind event handlers
-		_.bindAll(this, &#x27;handleAdd&#x27;, &#x27;handleRemove&#x27;, &#x27;handleReset&#x27;, &#x27;handleResort&#x27;);
+	module.exports = modelDock.extend({
 
 		/**
-		 * Hash on which itemView instances are stored.
+		 * Saves reference to the collectionView
 		 *
-		 * @property itemViews
-		 * @type Object
+		 * @method initialize
+		 * @param options {Object}
 		 */
-		this.itemViews = {};
-	};
+		initialize: function initializeCollectionItemView(options) {
+			// save reference to collectionView
+			// this must be done before modelDock.initialize,
+			// as the render method requires the collectionView object.
+			this.collectionView = options.collectionView;
+
+			modelDock.prototype.initialize.apply(this, arguments);
+		},
+
+
+		html: &#x27;&lt;div&gt;&lt;/div&gt;&#x27;,
+
+		/**
+		 * This method is invoked by modelDock.prototype.initialize,
+		 * as the modelDock requires the html to be ready before
+		 * attachment intialization.
+		 *
+		 * @method render
+		 */
+		render: function render() {
+			// get the position at which this model is.
+			var index = this.collectionView.collection.indexOf(this.model);
+
+			// build the $el.
+			this.$el = $(this.html);
+
+			// get the view that represents the model before this one.
+			var viewBefore = this.collectionView.getViewAt(index - 1);
+
+			if (viewBefore) {
+				// if htere is a view before,
+				// insert this.$el after that view&#x27;s $el
+				this.$el.insertAfter(viewBefore.$el);
+
+			} else {
+				// otherwise, the collectionView is still empty,
+				// thus just append to the container
+				this.$el.appendTo(this.collectionView.$container);
+
+			}
+		},
+
+		/**
+		 * Intercepts the default remove method, so
+		 * that we can make sure the item is also removed from the collectionView&#x27;s hash
+		 *
+		 * @method remove
+		 */
+		remove: function removeCollectionItemView() {
+
+			// remove itself from collection view
+			this.collectionView.removeView(this.model.cid);
+
+			modelDock.prototype.remove.apply(this, arguments);
+		},
+	});
 });
 
     </pre>

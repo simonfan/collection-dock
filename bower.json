@@ -1,7 +1,7 @@
 {
   "name": "collection-dock",
   "main": "built/collection-dock.js",
-  "version": "0.2.3",
+  "version": "0.3.3",
   "description": "Some module...",
   "dependencies": {
 	"lodash": "~2.4.1",
