@@ -4,26 +4,8 @@
         "version": "0.0.0"
     },
     "files": {
-        "src/__collection-dock/attach/event-handlers.js": {
-            "name": "src/__collection-dock/attach/event-handlers.js",
-            "modules": {
-                "event-hanlders": 1
-            },
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "src/__collection-dock/attach/initialize.js": {
-            "name": "src/__collection-dock/attach/initialize.js",
-            "modules": {
-                "attach.initialize": 1
-            },
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "src/__collection-dock/attach/item.js": {
-            "name": "src/__collection-dock/attach/item.js",
+        "src/__collection-dock/item/methods.js": {
+            "name": "src/__collection-dock/item/methods.js",
             "modules": {
                 "item": 1
             },
@@ -31,8 +13,15 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/__collection-dock/attach/methods.js": {
-            "name": "src/__collection-dock/attach/methods.js",
+        "src/__collection-dock/item/view.js": {
+            "name": "src/__collection-dock/item/view.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/__collection-dock/attach.js": {
+            "name": "src/__collection-dock/attach.js",
             "modules": {
                 "attach": 1
             },
@@ -40,8 +29,17 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/__collection-dock/proxy.js": {
-            "name": "src/__collection-dock/proxy.js",
+        "src/__collection-dock/event-handlers.js": {
+            "name": "src/__collection-dock/event-handlers.js",
+            "modules": {
+                "event-hanlders": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/__collection-dock/views-proxy.js": {
+            "name": "src/__collection-dock/views-proxy.js",
             "modules": {
                 "proxy": 1
             },
@@ -65,10 +63,9 @@
         "collection-dock": {
             "name": "collection-dock",
             "submodules": {
-                "event-hanlders": 1,
-                "attach.initialize": 1,
                 "item": 1,
                 "attach": 1,
+                "event-hanlders": 1,
                 "proxy": 1
             },
             "classes": {
@@ -78,34 +75,8 @@
             "namespaces": {},
             "tag": "module",
             "file": "src/index.js",
-            "line": 20,
+            "line": 17,
             "description": "Object that connects data to the html."
-        },
-        "event-hanlders": {
-            "name": "event-hanlders",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "collection-dock",
-            "namespace": "",
-            "file": "src/__collection-dock/attach/event-handlers.js",
-            "line": 1,
-            "description": "Defines the event handler for 'add' events on the collection."
-        },
-        "attach.initialize": {
-            "name": "attach.initialize",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "collection-dock",
-            "namespace": "",
-            "file": "src/__collection-dock/attach/initialize.js",
-            "line": 1,
-            "description": "Initialization logic for attach."
         },
         "item": {
             "name": "item",
@@ -116,7 +87,7 @@
             "namespaces": {},
             "module": "collection-dock",
             "namespace": "",
-            "file": "src/__collection-dock/attach/item.js",
+            "file": "src/__collection-dock/item/methods.js",
             "line": 1,
             "description": "Defines methods that generate item-related templates and data.\nMethods here should be overwritten for custom behaviour."
         },
@@ -129,9 +100,22 @@
             "namespaces": {},
             "module": "collection-dock",
             "namespace": "",
-            "file": "src/__collection-dock/attach/methods.js",
+            "file": "src/__collection-dock/attach.js",
             "line": 1,
             "description": "Defines methods that will be available\non dock instances."
+        },
+        "event-hanlders": {
+            "name": "event-hanlders",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "collection-dock",
+            "namespace": "",
+            "file": "src/__collection-dock/event-handlers.js",
+            "line": 1,
+            "description": "Defines the event handler for 'add' events on the collection."
         },
         "proxy": {
             "name": "proxy",
@@ -142,7 +126,7 @@
             "namespaces": {},
             "module": "collection-dock",
             "namespace": "",
-            "file": "src/__collection-dock/proxy.js",
+            "file": "src/__collection-dock/views-proxy.js",
             "line": 1,
             "description": "Proxies methods to the collection, if it is present."
         }
@@ -159,7 +143,7 @@
             "module": "collection-dock",
             "namespace": "",
             "file": "src/index.js",
-            "line": 20,
+            "line": 17,
             "is_constructor": 1,
             "params": [
                 {
@@ -172,8 +156,174 @@
     },
     "classitems": [
         {
-            "file": "src/__collection-dock/attach/event-handlers.js",
+            "file": "src/__collection-dock/item/methods.js",
+            "line": 15,
+            "description": "Builds the itemvieW.",
+            "itemtype": "method",
+            "name": "buildItemView",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
+        },
+        {
+            "file": "src/__collection-dock/item/methods.js",
+            "line": 29,
+            "description": "Must return an view object with a 'remove' method.",
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
+        },
+        {
+            "file": "src/__collection-dock/item/methods.js",
+            "line": 42,
+            "description": "Retrieves the view object at a given index.",
+            "itemtype": "method",
+            "name": "at",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
+        },
+        {
+            "file": "src/__collection-dock/item/methods.js",
+            "line": 56,
+            "description": "Stores the view at a given modelCid.",
+            "itemtype": "method",
+            "name": "store",
+            "params": [
+                {
+                    "name": "modelCid",
+                    "description": "",
+                    "type": "Number|Backbone Model"
+                },
+                {
+                    "name": "view",
+                    "description": "",
+                    "type": "Backbone View"
+                }
+            ],
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
+        },
+        {
+            "file": "src/__collection-dock/item/methods.js",
+            "line": 72,
+            "description": "Retrieves the view for a given model/modelCid",
+            "itemtype": "method",
+            "name": "getView",
+            "params": [
+                {
+                    "name": "modelCid",
+                    "description": "",
+                    "type": "Number|Backbone Model"
+                }
+            ],
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
+        },
+        {
+            "file": "src/__collection-dock/item/methods.js",
+            "line": 84,
+            "description": "Deletes the view for a given model/modelCid from the itemViews hash.",
+            "itemtype": "method",
+            "name": "getView",
+            "params": [
+                {
+                    "name": "modelCid",
+                    "description": "",
+                    "type": "Number|Backbone Model"
+                }
+            ],
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "item"
+        },
+        {
+            "file": "src/__collection-dock/item/view.js",
+            "line": 8,
+            "description": "Saves reference to the collectionView",
+            "itemtype": "method",
+            "name": "initialize",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "collectionDock",
+            "module": "collection-dock"
+        },
+        {
+            "file": "src/__collection-dock/item/view.js",
+            "line": 26,
+            "description": "This method is invoked by modelDock.prototype.initialize,\nas the modelDock requires the html to be ready before\nattachment intialization.",
+            "itemtype": "method",
+            "name": "render",
+            "class": "collectionDock",
+            "module": "collection-dock"
+        },
+        {
+            "file": "src/__collection-dock/item/view.js",
+            "line": 56,
+            "description": "Intercepts the default remove method, so\nthat we can make sure the item is also removed from the collectionView's hash",
+            "itemtype": "method",
+            "name": "remove",
+            "class": "collectionDock",
+            "module": "collection-dock"
+        },
+        {
+            "file": "src/__collection-dock/attach.js",
             "line": 14,
+            "description": "event that indicates that the collection was completely\nreordered.",
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "attach"
+        },
+        {
+            "file": "src/__collection-dock/attach.js",
+            "line": 20,
+            "description": "Attaches a given Backbone collection to the data dock.\nbasically detaches the previous collection and sets new listeners.",
+            "itemtype": "method",
+            "name": "attach",
+            "params": [
+                {
+                    "name": "collection",
+                    "description": ""
+                }
+            ],
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "attach"
+        },
+        {
+            "file": "src/__collection-dock/attach.js",
+            "line": 47,
+            "description": "Detaches the collection from the dock.\nBasically removes listeners.",
+            "itemtype": "method",
+            "name": "detach",
+            "class": "collectionDock",
+            "module": "collection-dock",
+            "submodule": "attach"
+        },
+        {
+            "file": "src/__collection-dock/event-handlers.js",
+            "line": 15,
             "description": "Handles add events on the collection.",
             "itemtype": "method",
             "name": "handleAdd",
@@ -191,8 +341,8 @@
             "submodule": "event-hanlders"
         },
         {
-            "file": "src/__collection-dock/attach/event-handlers.js",
-            "line": 44,
+            "file": "src/__collection-dock/event-handlers.js",
+            "line": 32,
             "description": "Handles remove events on the collection.",
             "itemtype": "method",
             "name": "handleRemove",
@@ -210,8 +360,8 @@
             "submodule": "event-hanlders"
         },
         {
-            "file": "src/__collection-dock/attach/event-handlers.js",
-            "line": 60,
+            "file": "src/__collection-dock/event-handlers.js",
+            "line": 47,
             "description": "Handles reset events on the collection.",
             "itemtype": "method",
             "name": "handleReset",
@@ -229,8 +379,8 @@
             "submodule": "event-hanlders"
         },
         {
-            "file": "src/__collection-dock/attach/event-handlers.js",
-            "line": 78,
+            "file": "src/__collection-dock/event-handlers.js",
+            "line": 65,
             "description": "Handles resort events on the collection.",
             "itemtype": "method",
             "name": "handleResort",
@@ -248,122 +398,8 @@
             "submodule": "event-hanlders"
         },
         {
-            "file": "src/__collection-dock/attach/initialize.js",
-            "line": 18,
-            "description": "Hash on which itemView instances are stored.",
-            "itemtype": "property",
-            "name": "itemViews",
-            "type": "Object",
-            "class": "collectionDock",
-            "module": "collection-dock",
-            "submodule": "attach.initialize"
-        },
-        {
-            "file": "src/__collection-dock/attach/item.js",
-            "line": 14,
-            "description": "Places the $item at a given position within the container.",
-            "itemtype": "method",
-            "name": "placeItemHtml",
-            "params": [
-                {
-                    "name": "at",
-                    "description": "",
-                    "type": "Number"
-                },
-                {
-                    "name": "$item",
-                    "description": "",
-                    "type": "Jq Object"
-                }
-            ],
-            "class": "collectionDock",
-            "module": "collection-dock",
-            "submodule": "item"
-        },
-        {
-            "file": "src/__collection-dock/attach/item.js",
-            "line": 32,
-            "description": "Either method or property,\nis / returns the html string for the item.",
-            "itemtype": "method",
-            "name": "itemHtml",
-            "params": [
-                {
-                    "name": "model",
-                    "description": ""
-                }
-            ],
-            "class": "collectionDock",
-            "module": "collection-dock",
-            "submodule": "item"
-        },
-        {
-            "file": "src/__collection-dock/attach/item.js",
-            "line": 41,
-            "description": "Must return an view object with a 'remove' method.",
-            "class": "collectionDock",
-            "module": "collection-dock",
-            "submodule": "item"
-        },
-        {
-            "file": "src/__collection-dock/attach/item.js",
-            "line": 48,
-            "description": "Retrieves OR stores the view that represents a model instance.",
-            "itemtype": "method",
-            "name": "itemViewInstance",
-            "params": [
-                {
-                    "name": "model",
-                    "description": "",
-                    "type": "Bakcobne Model Object"
-                },
-                {
-                    "name": "view",
-                    "description": "",
-                    "type": "Bakcobne View Object",
-                    "optional": true
-                }
-            ],
-            "class": "collectionDock",
-            "module": "collection-dock",
-            "submodule": "item"
-        },
-        {
-            "file": "src/__collection-dock/attach/methods.js",
-            "line": 14,
-            "description": "event that indicates that the collection was completely\nreordered.",
-            "class": "collectionDock",
-            "module": "collection-dock",
-            "submodule": "attach"
-        },
-        {
-            "file": "src/__collection-dock/attach/methods.js",
-            "line": 20,
-            "description": "Attaches a given Backbone collection to the data dock.\nbasically detaches the previous collection and sets new listeners.",
-            "itemtype": "method",
-            "name": "attach",
-            "params": [
-                {
-                    "name": "collection",
-                    "description": ""
-                }
-            ],
-            "class": "collectionDock",
-            "module": "collection-dock",
-            "submodule": "attach"
-        },
-        {
-            "file": "src/__collection-dock/attach/methods.js",
-            "line": 47,
-            "description": "Detaches the collection from the dock.\nBasically removes listeners.",
-            "itemtype": "method",
-            "name": "detach",
-            "class": "collectionDock",
-            "module": "collection-dock",
-            "submodule": "attach"
-        },
-        {
             "file": "src/index.js",
-            "line": 30,
+            "line": 27,
             "description": "The extensions object will be incorporated to the new object.",
             "params": [
                 {
@@ -373,20 +409,30 @@
             ],
             "class": "collectionDock",
             "module": "collection-dock"
+        },
+        {
+            "file": "src/index.js",
+            "line": 51,
+            "description": "Hash on which itemView instances are stored, keyed by model CID",
+            "itemtype": "property",
+            "name": "itemViews",
+            "type": "Objects",
+            "class": "collectionDock",
+            "module": "collection-dock"
         }
     ],
     "warnings": [
         {
             "message": "Missing item type\nMust return an view object with a 'remove' method.",
-            "line": " src/__collection-dock/attach/item.js:41"
+            "line": " src/__collection-dock/item/methods.js:29"
         },
         {
             "message": "Missing item type\nevent that indicates that the collection was completely\nreordered.",
-            "line": " src/__collection-dock/attach/methods.js:14"
+            "line": " src/__collection-dock/attach.js:14"
         },
         {
             "message": "Missing item type\nThe extensions object will be incorporated to the new object.",
-            "line": " src/index.js:30"
+            "line": " src/index.js:27"
         }
     ]
 }

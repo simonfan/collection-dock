@@ -62,10 +62,4 @@ define(function (require, exports, module) {
 
 		this.$container.html('');
 	};
-
-	// item-related
-	_.extend(exports, require('./item'));
-
-	// event-handlers
-	_.extend(exports, require('./event-handlers'));
 });

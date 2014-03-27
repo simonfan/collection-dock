@@ -9,7 +9,8 @@ define(function (require, exports, module) {
 
 	// external
 	var _ = require('lodash'),
-		$ = require('jquery');
+		$ = require('jquery'),
+		q = require('q');
 
 	/**
 	 * Handles add events on the collection.
@@ -19,26 +20,13 @@ define(function (require, exports, module) {
 	 * @param model {model Object}
 	 */
 	exports.handleAdd = function handleAdd(model) {
-
-		// [1] $item
-		var itemHtml = _.isString(this.itemHtml) ? this.itemHtml : this.itemHtml(model.attributes),
-			$item = $(itemHtml);
-
-		// [2] placeItemHtml
-		// [2.1] get index
-		var at = this.collection.indexOf(model);
-		this.placeItemHtml(at, $item);
-
-		// [3] instantiate the itemView
-		// [3.1] instantiate
-		var view = this.itemView({
+		// [1] instantiate the itemView
+		var view = this.buildItemView({
 			model: model,
-			el: $item,
-			$el: $item
 		});
 
-		// [3.2] store
-		this.itemViewInstance(model, view);
+		// [2] store
+		this.storeView(model, view);
 	};
 
 	/**
@@ -48,9 +36,8 @@ define(function (require, exports, module) {
 	 * @private
 	 * @param model {model Object}
 	 */
-	exports.handleRemove = function handleRemove(model) {
-		// retrieve the item view.
-		var view = this.itemViewInstance(model);
+	exports.handleRemove = function handleRemove(model, index) {
+		var view = this.getView(model);
 
 		if (view) {
 			view.remove();

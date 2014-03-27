@@ -49,8 +49,6 @@
             
                 <li><a href="../modules/attach.html">attach</a></li>
             
-                <li><a href="../modules/attach.initialize.html">attach.initialize</a></li>
-            
                 <li><a href="../modules/collection-dock.html">collection-dock</a></li>
             
                 <li><a href="../modules/event-hanlders.html">event-hanlders</a></li>
@@ -114,9 +112,6 @@ define(function (require, exports, module) {
 	var _ = require(&#x27;lodash&#x27;),
 		backbone = require(&#x27;lowercase-backbone&#x27;);
 
-	// sub
-	var initAttach = require(&#x27;./__collection-dock/attach/initialize&#x27;);
-
 	/**
 	 * @class collectionDock
 	 * @constructor
@@ -147,12 +142,25 @@ define(function (require, exports, module) {
 			this.$container = this.$el;
 		}
 
-		// initialize attach
-		initAttach.call(this);
+
+		// bind event handlers
+		_.bindAll(this, &#x27;handleAdd&#x27;, &#x27;handleRemove&#x27;, &#x27;handleReset&#x27;, &#x27;handleResort&#x27;);
+
+		/**
+		 * Hash on which itemView instances are stored, keyed by model CID
+		 *
+		 * @property itemViews
+		 * @type Objects
+		 */
+		this.itemViews = {};
 	});
 
-	dock.proto(require(&#x27;./__collection-dock/attach/methods&#x27;));
-	dock.proto(require(&#x27;./__collection-dock/proxy&#x27;));
+	dock.proto(require(&#x27;./__collection-dock/attach&#x27;));
+	dock.proto(require(&#x27;./__collection-dock/views-proxy&#x27;));
+
+
+	dock.proto(require(&#x27;./__collection-dock/event-handlers&#x27;));
+	dock.proto(require(&#x27;./__collection-dock/item/methods&#x27;));
 });
 
     </pre>

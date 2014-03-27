@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>attach.initialize - collection-dock</title>
+    <title>src/__collection-dock/attach.js - collection-dock</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -49,8 +49,6 @@
             
                 <li><a href="../modules/attach.html">attach</a></li>
             
-                <li><a href="../modules/attach.initialize.html">attach.initialize</a></li>
-            
                 <li><a href="../modules/collection-dock.html">collection-dock</a></li>
             
                 <li><a href="../modules/event-hanlders.html">event-hanlders</a></li>
@@ -94,38 +92,77 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>attach.initialize Module</h1>
-<div class="box clearfix meta">
-    
+                        <h1 class="file-heading">File: src/__collection-dock/attach.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * Defines methods that will be available
+ * on dock instances.
+ *
+ * @module collection-dock
+ * @submodule attach
+ */
+define(function (require, exports, module) {
+	&#x27;use strict&#x27;;
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src___collection-dock_attach_initialize.js.html#l1"><code>src&#x2F;__collection-dock&#x2F;attach&#x2F;initialize.js:1</code></a>
-        </div>
-    
+	// external
+	var _ = require(&#x27;lodash&#x27;);
 
-    
-</div>
+	/**
+	 * event that indicates that the collection was completely
+	 * reordered.
+	 */
+	exports.resortEvent = &#x27;resort&#x27;;
+
+	/**
+	 * Attaches a given Backbone collection to the data dock.
+	 * basically detaches the previous collection and sets new listeners.
+	 *
+	 * @method attach
+	 * @param collection
+	 */
+	exports.attach = function attach(collection) {
+
+		// [1] detach
+		this.detach();
+
+		// [2] change collection
+		this.collection = collection;
+
+		// [3] events
+		collection
+			.on(&#x27;add&#x27;, this.handleAdd)
+			.on(&#x27;remove&#x27;, this.handleRemove)
+			.on(&#x27;reset&#x27;, this.handleReset)
+			.on(this.resortEvent, this.handleResort);
+
+		// [4] start.
+		this.handleReset(collection);
+	};
 
 
+	/**
+	 * Detaches the collection from the dock.
+	 * Basically removes listeners.
+	 *
+	 * @method detach
+	 */
+	exports.detach = function detach() {
 
-<div class="box intro">
-    <p>Initialization logic for attach.</p>
+		if (this.collection) {
+			this.collection
+				.off(&#x27;add&#x27;, void(0), this)
+				.off(&#x27;remove&#x27;, void(0), this)
+				.off(&#x27;reset&#x27;, void(0), this)
+				.off(this.resortEvent, void(0), this);
+		}
 
-</div>
+		this.$container.html(&#x27;&#x27;);
+	};
+});
 
-
-
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-    </div>
-
-    <div class="yui3-u-1-2">
-        
-    </div>
+    </pre>
 </div>
 
                     </div>

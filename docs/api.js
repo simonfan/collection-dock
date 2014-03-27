@@ -5,7 +5,6 @@ YUI.add("yuidoc-meta", function(Y) {
     ],
     "modules": [
         "attach",
-        "attach.initialize",
         "collection-dock",
         "event-hanlders",
         "item",
@@ -16,11 +15,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "attach",
             "name": "attach",
             "description": "Defines methods that will be available\non dock instances."
-        },
-        {
-            "displayName": "attach.initialize",
-            "name": "attach.initialize",
-            "description": "Initialization logic for attach."
         },
         {
             "displayName": "collection-dock",
