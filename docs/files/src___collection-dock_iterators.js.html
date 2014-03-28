@@ -118,18 +118,15 @@ define(function (require, exports, module) {
 		return this;
 	};
 
-
-
-
-
-
-	function invokeLodashMethod(method, args) {
-		return _[method].apply(_, args);
-	}
-
-
-
-	var _methods = [&#x27;each&#x27;, &#x27;rest&#x27;, &#x27;first&#x27;];
+	// Underscore methods that we want to implement on the Collection.
+	// 90% of the core usefulness of Backbone Collections is actually implemented
+	// right here:
+	var _methods = [&#x27;forEach&#x27;, &#x27;each&#x27;, &#x27;map&#x27;, &#x27;collect&#x27;, &#x27;reduce&#x27;, &#x27;foldl&#x27;,
+	&#x27;inject&#x27;, &#x27;reduceRight&#x27;, &#x27;foldr&#x27;, &#x27;find&#x27;, &#x27;detect&#x27;, &#x27;filter&#x27;, &#x27;select&#x27;,
+	&#x27;reject&#x27;, &#x27;every&#x27;, &#x27;all&#x27;, &#x27;some&#x27;, &#x27;any&#x27;, &#x27;include&#x27;, &#x27;contains&#x27;, &#x27;invoke&#x27;,
+	&#x27;max&#x27;, &#x27;min&#x27;, &#x27;toArray&#x27;, &#x27;size&#x27;, &#x27;first&#x27;, &#x27;head&#x27;, &#x27;take&#x27;, &#x27;initial&#x27;, &#x27;rest&#x27;,
+	&#x27;tail&#x27;, &#x27;drop&#x27;, &#x27;last&#x27;, &#x27;without&#x27;, &#x27;difference&#x27;, &#x27;indexOf&#x27;, &#x27;shuffle&#x27;,
+	&#x27;lastIndexOf&#x27;, &#x27;isEmpty&#x27;, &#x27;chain&#x27;, &#x27;sample&#x27;, &#x27;partition&#x27;];
 
 	_.each(_methods, function (method) {
 		exports[method] = function () {
@@ -139,9 +136,10 @@ define(function (require, exports, module) {
 			// add itemViews
 			args.unshift(this.itemViews);
 
-			return invokeLodashMethod(method, args);
+			return _[method].apply(_, args);
 		};
 	});
+
 });
 
     </pre>

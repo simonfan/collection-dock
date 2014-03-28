@@ -20,18 +20,15 @@ define(function (require, exports, module) {
 		return this;
 	};
 
-
-
-
-
-
-	function invokeLodashMethod(method, args) {
-		return _[method].apply(_, args);
-	}
-
-
-
-	var _methods = ['each', 'rest', 'first'];
+	// Underscore methods that we want to implement on the Collection.
+	// 90% of the core usefulness of Backbone Collections is actually implemented
+	// right here:
+	var _methods = ['forEach', 'each', 'map', 'collect', 'reduce', 'foldl',
+	'inject', 'reduceRight', 'foldr', 'find', 'detect', 'filter', 'select',
+	'reject', 'every', 'all', 'some', 'any', 'include', 'contains', 'invoke',
+	'max', 'min', 'toArray', 'size', 'first', 'head', 'take', 'initial', 'rest',
+	'tail', 'drop', 'last', 'without', 'difference', 'indexOf', 'shuffle',
+	'lastIndexOf', 'isEmpty', 'chain', 'sample', 'partition'];
 
 	_.each(_methods, function (method) {
 		exports[method] = function () {
@@ -41,7 +38,8 @@ define(function (require, exports, module) {
 			// add itemViews
 			args.unshift(this.itemViews);
 
-			return invokeLodashMethod(method, args);
+			return _[method].apply(_, args);
 		};
 	});
+
 });
