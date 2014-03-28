@@ -115,12 +115,21 @@ define(function (require, exports, module) {
 	 * @method buildItemView
 	 * @param options {Object}
 	 */
-	exports.buildItemView = function buildItemView(options) {
+	exports.buildItemView = function buildItemView(model) {
 
-		// reference to the collectionView
-		options.collectionView = this;
+		// build the view
+		var view = this.itemView({
+			model: model,
+			collectionView: this,
+		});
 
-		return this.itemView(options);
+		// get index
+		var index = this.collection.indexOf(view.model);
+
+		// store
+		this.itemViews.splice(index, 0, view);
+
+		return view;
 	};
 
 	/**
@@ -134,8 +143,6 @@ define(function (require, exports, module) {
 
 	// STORAGE
 
-	// by index
-
 	/**
 	 * Retrieves the view object at a given index.
 	 *
@@ -143,53 +150,43 @@ define(function (require, exports, module) {
 	 * @param index {Number}
 	 */
 	exports.getViewAt = function getViewAt(index) {
-		if (index &gt;= 0) {
-			var model = this.collection.at(index);
-
-			return this.getView(model.cid);
-		}
+		return this.itemViews[index];
 	};
 
-	/**
-	 * Stores the view at a given modelCid.
-	 *
-	 * @method store
-	 * @param modelCid {Number|Backbone Model}
-	 * @param view {Backbone View}
-	 */
-	exports.storeView = function storeView(modelCid, view) {
-		// if modelCid is an object, it must be the model itself.
-		modelCid = _.isObject(modelCid) ? modelCid.cid : modelCid;
-
-		this.itemViews[modelCid] = view;
+	exports.eraseViewAt = function eraseViewAt(index) {
+		this.itemViews.splice(index, 1);
 
 		return this;
 	};
 
+
+
 	/**
-	 * Retrieves the view for a given model/modelCid
+	 * Retrieves the view for a given model/mcid
 	 *
 	 * @method getView
-	 * @param modelCid {Number|Backbone Model}
+	 * @param mcid {Number}
 	 */
-	exports.getView = function getView(modelCid) {
-		// if modelCid is an object, it must be the model itself.
-		modelCid = _.isObject(modelCid) ? modelCid.cid : modelCid;
-
-		return this.itemViews[modelCid];
+	exports.getView = function getView(mcid) {
+		return _.find(this.itemViews, function (view) {
+			return view.model.cid === mcid;
+		});
 	};
+
+
 	/**
-	 * Deletes the view for a given model/modelCid from the itemViews hash.
+	 * Deletes the view for a given model/mcid from the itemViews hash.
 	 *
 	 * @method getView
-	 * @param modelCid {Number|Backbone Model}
+	 * @param mcid {Number}
 	 */
-	exports.removeView = function removeView(modelCid) {
-		// if modelCid is an object, it must be the model itself.
-		modelCid = _.isObject(modelCid) ? modelCid.cid : modelCid;
-		delete this.itemViews[modelCid];
+	exports.eraseView = function eraseView(mcid) {
 
-		return this;
+		var index = _.findIndex(this.itemViews, function (view) {
+			return view.model.cid === mcid;
+		});
+
+		return this.eraseViewAt(index);
 	};
 
 });

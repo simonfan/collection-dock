@@ -19,13 +19,7 @@ define(function (require, exports, module) {
 	 * @param model {model Object}
 	 */
 	exports.handleAdd = function handleAdd(model) {
-		// [1] instantiate the itemView
-		var view = this.buildItemView({
-			model: model,
-		});
-
-		// [2] store
-		this.storeView(model, view);
+		var view = this.buildItemView(model);
 	};
 
 	/**
@@ -35,8 +29,9 @@ define(function (require, exports, module) {
 	 * @private
 	 * @param model {model Object}
 	 */
-	exports.handleRemove = function handleRemove(model, index) {
-		var view = this.getView(model);
+	exports.handleRemove = function handleRemove(model) {
+
+		var view = this.getView(model.cid);
 
 		if (view) {
 			view.remove();

@@ -38,8 +38,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/__collection-dock/views-proxy.js": {
-            "name": "src/__collection-dock/views-proxy.js",
+        "src/__collection-dock/iterators.js": {
+            "name": "src/__collection-dock/iterators.js",
             "modules": {
                 "proxy": 1
             },
@@ -126,7 +126,7 @@
             "namespaces": {},
             "module": "collection-dock",
             "namespace": "",
-            "file": "src/__collection-dock/views-proxy.js",
+            "file": "src/__collection-dock/iterators.js",
             "line": 1,
             "description": "Proxies methods to the collection, if it is present."
         }
@@ -174,7 +174,7 @@
         },
         {
             "file": "src/__collection-dock/item/methods.js",
-            "line": 28,
+            "line": 37,
             "description": "Must return an view object with a 'remove' method.",
             "class": "collectionDock",
             "module": "collection-dock",
@@ -182,7 +182,7 @@
         },
         {
             "file": "src/__collection-dock/item/methods.js",
-            "line": 41,
+            "line": 48,
             "description": "Retrieves the view object at a given index.",
             "itemtype": "method",
             "name": "at",
@@ -199,20 +199,15 @@
         },
         {
             "file": "src/__collection-dock/item/methods.js",
-            "line": 55,
-            "description": "Stores the view at a given modelCid.",
+            "line": 66,
+            "description": "Retrieves the view for a given model/mcid",
             "itemtype": "method",
-            "name": "store",
+            "name": "getView",
             "params": [
                 {
-                    "name": "modelCid",
+                    "name": "mcid",
                     "description": "",
-                    "type": "Number|Backbone Model"
-                },
-                {
-                    "name": "view",
-                    "description": "",
-                    "type": "Backbone View"
+                    "type": "Number"
                 }
             ],
             "class": "collectionDock",
@@ -221,32 +216,15 @@
         },
         {
             "file": "src/__collection-dock/item/methods.js",
-            "line": 71,
-            "description": "Retrieves the view for a given model/modelCid",
+            "line": 79,
+            "description": "Deletes the view for a given model/mcid from the itemViews hash.",
             "itemtype": "method",
             "name": "getView",
             "params": [
                 {
-                    "name": "modelCid",
+                    "name": "mcid",
                     "description": "",
-                    "type": "Number|Backbone Model"
-                }
-            ],
-            "class": "collectionDock",
-            "module": "collection-dock",
-            "submodule": "item"
-        },
-        {
-            "file": "src/__collection-dock/item/methods.js",
-            "line": 83,
-            "description": "Deletes the view for a given model/modelCid from the itemViews hash.",
-            "itemtype": "method",
-            "name": "getView",
-            "params": [
-                {
-                    "name": "modelCid",
-                    "description": "",
-                    "type": "Number|Backbone Model"
+                    "type": "Number"
                 }
             ],
             "class": "collectionDock",
@@ -357,7 +335,7 @@
         },
         {
             "file": "src/__collection-dock/event-handlers.js",
-            "line": 31,
+            "line": 25,
             "description": "Handles remove events on the collection.",
             "itemtype": "method",
             "name": "handleRemove",
@@ -376,7 +354,7 @@
         },
         {
             "file": "src/__collection-dock/event-handlers.js",
-            "line": 46,
+            "line": 41,
             "description": "Handles reset events on the collection.",
             "itemtype": "method",
             "name": "handleReset",
@@ -395,7 +373,7 @@
         },
         {
             "file": "src/__collection-dock/event-handlers.js",
-            "line": 64,
+            "line": 59,
             "description": "Handles resort events on the collection.",
             "itemtype": "method",
             "name": "handleResort",
@@ -455,7 +433,7 @@
     "warnings": [
         {
             "message": "Missing item type\nMust return an view object with a 'remove' method.",
-            "line": " src/__collection-dock/item/methods.js:28"
+            "line": " src/__collection-dock/item/methods.js:37"
         },
         {
             "message": "Missing item type\nevent that indicates that the collection was completely\nreordered.",

@@ -71,13 +71,13 @@ define('__collection-dock/attach',['require','exports','module','lodash'],functi
  * @module collection-dock
  * @submodule proxy
  */
-define('__collection-dock/views-proxy',['require','exports','module','lodash'],function (require, exports, module) {
+define('__collection-dock/iterators',['require','exports','module','lodash'],function (require, exports, module) {
 	
 
 	var _ = require('lodash');
 
 	// events
-	exports.on = function onViews() {
+	exports.onViews = function onViews() {
 		var args = Array.prototype.slice.call(arguments);
 
 		_.each(this.itemViews, function (view) {
@@ -86,6 +86,31 @@ define('__collection-dock/views-proxy',['require','exports','module','lodash'],f
 
 		return this;
 	};
+
+
+
+
+
+
+	function invokeLodashMethod(method, args) {
+		return _[method].apply(_, args);
+	}
+
+
+
+	var _methods = ['each', 'rest', 'first'];
+
+	_.each(_methods, function (method) {
+		exports[method] = function () {
+
+			var args = Array.prototype.slice.call(arguments);
+
+			// add itemViews
+			args.unshift(this.itemViews);
+
+			return invokeLodashMethod(method, args);
+		};
+	});
 });
 
 /**
@@ -109,13 +134,7 @@ define('__collection-dock/event-handlers',['require','exports','module','lodash'
 	 * @param model {model Object}
 	 */
 	exports.handleAdd = function handleAdd(model) {
-		// [1] instantiate the itemView
-		var view = this.buildItemView({
-			model: model,
-		});
-
-		// [2] store
-		this.storeView(model, view);
+		var view = this.buildItemView(model);
 	};
 
 	/**
@@ -125,8 +144,9 @@ define('__collection-dock/event-handlers',['require','exports','module','lodash'
 	 * @private
 	 * @param model {model Object}
 	 */
-	exports.handleRemove = function handleRemove(model, index) {
-		var view = this.getView(model);
+	exports.handleRemove = function handleRemove(model) {
+
+		var view = this.getView(model.cid);
 
 		if (view) {
 			view.remove();
@@ -239,7 +259,7 @@ define('__collection-dock/item/view',['require','exports','module','jquery','low
 		remove: function removeCollectionItemView() {
 
 			// remove itself from collection view
-			this.collectionView.removeView(this.model.cid);
+			this.collectionView.eraseView(this.model.cid);
 
 			backbone.view.prototype.remove.apply(this, arguments);
 		},
@@ -265,12 +285,21 @@ define('__collection-dock/item/methods',['require','exports','module','lodash','
 	 * @method buildItemView
 	 * @param options {Object}
 	 */
-	exports.buildItemView = function buildItemView(options) {
+	exports.buildItemView = function buildItemView(model) {
 
-		// reference to the collectionView
-		options.collectionView = this;
+		// build the view
+		var view = this.itemView({
+			model: model,
+			collectionView: this,
+		});
 
-		return this.itemView(options);
+		// get index
+		var index = this.collection.indexOf(view.model);
+
+		// store
+		this.itemViews.splice(index, 0, view);
+
+		return view;
 	};
 
 	/**
@@ -284,8 +313,6 @@ define('__collection-dock/item/methods',['require','exports','module','lodash','
 
 	// STORAGE
 
-	// by index
-
 	/**
 	 * Retrieves the view object at a given index.
 	 *
@@ -293,53 +320,43 @@ define('__collection-dock/item/methods',['require','exports','module','lodash','
 	 * @param index {Number}
 	 */
 	exports.getViewAt = function getViewAt(index) {
-		if (index >= 0) {
-			var model = this.collection.at(index);
-
-			return this.getView(model.cid);
-		}
+		return this.itemViews[index];
 	};
 
-	/**
-	 * Stores the view at a given modelCid.
-	 *
-	 * @method store
-	 * @param modelCid {Number|Backbone Model}
-	 * @param view {Backbone View}
-	 */
-	exports.storeView = function storeView(modelCid, view) {
-		// if modelCid is an object, it must be the model itself.
-		modelCid = _.isObject(modelCid) ? modelCid.cid : modelCid;
-
-		this.itemViews[modelCid] = view;
+	exports.eraseViewAt = function eraseViewAt(index) {
+		this.itemViews.splice(index, 1);
 
 		return this;
 	};
 
+
+
 	/**
-	 * Retrieves the view for a given model/modelCid
+	 * Retrieves the view for a given model/mcid
 	 *
 	 * @method getView
-	 * @param modelCid {Number|Backbone Model}
+	 * @param mcid {Number}
 	 */
-	exports.getView = function getView(modelCid) {
-		// if modelCid is an object, it must be the model itself.
-		modelCid = _.isObject(modelCid) ? modelCid.cid : modelCid;
-
-		return this.itemViews[modelCid];
+	exports.getView = function getView(mcid) {
+		return _.find(this.itemViews, function (view) {
+			return view.model.cid === mcid;
+		});
 	};
+
+
 	/**
-	 * Deletes the view for a given model/modelCid from the itemViews hash.
+	 * Deletes the view for a given model/mcid from the itemViews hash.
 	 *
 	 * @method getView
-	 * @param modelCid {Number|Backbone Model}
+	 * @param mcid {Number}
 	 */
-	exports.removeView = function removeView(modelCid) {
-		// if modelCid is an object, it must be the model itself.
-		modelCid = _.isObject(modelCid) ? modelCid.cid : modelCid;
-		delete this.itemViews[modelCid];
+	exports.eraseView = function eraseView(mcid) {
 
-		return this;
+		var index = _.findIndex(this.itemViews, function (view) {
+			return view.model.cid === mcid;
+		});
+
+		return this.eraseViewAt(index);
 	};
 
 });
@@ -354,7 +371,7 @@ define('__collection-dock/item/methods',['require','exports','module','lodash','
  * @module collection-dock
  */
 
-define('collection-dock',['require','exports','module','lodash','lowercase-backbone','./__collection-dock/attach','./__collection-dock/views-proxy','./__collection-dock/event-handlers','./__collection-dock/item/methods'],function (require, exports, module) {
+define('collection-dock',['require','exports','module','lodash','lowercase-backbone','./__collection-dock/attach','./__collection-dock/iterators','./__collection-dock/event-handlers','./__collection-dock/item/methods'],function (require, exports, module) {
 	
 
 	var _ = require('lodash'),
@@ -413,12 +430,12 @@ define('collection-dock',['require','exports','module','lodash','lowercase-backb
 			 * @property itemViews
 			 * @type Objects
 			 */
-			this.itemViews = {};
+			this.itemViews = [];
 		},
 	});
 
 	dock.proto(require('./__collection-dock/attach'));
-	dock.proto(require('./__collection-dock/views-proxy'));
+	dock.proto(require('./__collection-dock/iterators'));
 
 
 	dock.proto(require('./__collection-dock/event-handlers'));

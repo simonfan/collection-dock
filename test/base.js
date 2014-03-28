@@ -146,7 +146,6 @@
 					{ id: 3, name: 'Watermelon' }
 				]);
 
-
 				// next tick
 				setTimeout(done, 100);
 			});

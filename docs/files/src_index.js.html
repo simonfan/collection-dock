@@ -165,12 +165,12 @@ define(function (require, exports, module) {
 			 * @property itemViews
 			 * @type Objects
 			 */
-			this.itemViews = {};
+			this.itemViews = [];
 		},
 	});
 
 	dock.proto(require(&#x27;./__collection-dock/attach&#x27;));
-	dock.proto(require(&#x27;./__collection-dock/views-proxy&#x27;));
+	dock.proto(require(&#x27;./__collection-dock/iterators&#x27;));
 
 
 	dock.proto(require(&#x27;./__collection-dock/event-handlers&#x27;));
