@@ -94,13 +94,12 @@ define('__collection-dock/views-proxy',['require','exports','module','lodash'],f
  * @module collection-dock
  * @submodule event-hanlders
  */
-define('__collection-dock/event-handlers',['require','exports','module','lodash','jquery','q'],function (require, exports, module) {
+define('__collection-dock/event-handlers',['require','exports','module','lodash','jquery'],function (require, exports, module) {
 	
 
 	// external
 	var _ = require('lodash'),
-		$ = require('jquery'),
-		q = require('q');
+		$ = require('jquery');
 
 	/**
 	 * Handles add events on the collection.
@@ -165,34 +164,45 @@ define('__collection-dock/event-handlers',['require','exports','module','lodash'
 
 });
 
-define('__collection-dock/item/view',['require','exports','module','model-dock','jquery'],function (require, exports, module) {
+define('__collection-dock/item/view',['require','exports','module','jquery','lowercase-backbone'],function (require, exports, module) {
+	
 
-	var modelDock = require('model-dock'),
-		$ = require('jquery');
+	var $ = require('jquery'),
+		backbone = require('lowercase-backbone');
 
-	module.exports = modelDock.extend({
+	module.exports = backbone.view.extend({
 
 		/**
-		 * Saves reference to the collectionView
+		 *
 		 *
 		 * @method initialize
 		 * @param options {Object}
 		 */
-		initialize: function initializeCollectionItemView(options) {
-			// save reference to collectionView
-			// this must be done before modelDock.initialize,
-			// as the render method requires the collectionView object.
-			this.collectionView = options.collectionView;
+		initialize: function (options) {
 
-			modelDock.prototype.initialize.apply(this, arguments);
+			backbone.view.prototype.initialize.apply(this, arguments);
+
+			this.initializeItemView.apply(this, arguments);
+
+			this.render();
+		},
+
+		/**
+		 * Holds initialization logic exclusive to itemView.
+		 *
+		 * @method initializeItemView
+		 * @param options {Object}
+		 */
+		initializeItemView: function initializeItemView(options) {
+			this.collectionView = options.collectionView;
 		},
 
 
 		html: '<div></div>',
 
 		/**
-		 * This method is invoked by modelDock.prototype.initialize,
-		 * as the modelDock requires the html to be ready before
+		 * This method is invoked by backbone.view.prototype.initialize,
+		 * as the backbone.view requires the html to be ready before
 		 * attachment intialization.
 		 *
 		 * @method render
@@ -231,7 +241,7 @@ define('__collection-dock/item/view',['require','exports','module','model-dock',
 			// remove itself from collection view
 			this.collectionView.removeView(this.model.cid);
 
-			modelDock.prototype.remove.apply(this, arguments);
+			backbone.view.prototype.remove.apply(this, arguments);
 		},
 	});
 });
@@ -243,12 +253,11 @@ define('__collection-dock/item/view',['require','exports','module','model-dock',
  * @module collection-dock
  * @submodule item
  */
-define('__collection-dock/item/methods',['require','exports','module','lodash','q','./view'],function (require, exports, module) {
+define('__collection-dock/item/methods',['require','exports','module','lodash','./view'],function (require, exports, module) {
 	
 
 	// external
-	var _ = require('lodash'),
-		q = require('q');
+	var _ = require('lodash');
 
 	/**
 	 * Builds the itemvieW.
@@ -356,42 +365,56 @@ define('collection-dock',['require','exports','module','lodash','lowercase-backb
 	 * @constructor
 	 * @param extensions {Object}
 	 */
-	var dock = module.exports = backbone.view.extend(function collectionDock(extensions) {
+	var dock = module.exports = backbone.view.extend({
+		initialize: function (options) {
 
-		// initialize basic view
-		backbone.view.prototype.initialize.apply(this, arguments);
+			// initialize basic view
+			backbone.view.prototype.initialize.apply(this, arguments);
 
-		/**
-		 * The extensions object will be incorporated to the new object.
-		 *
-		 * @param extensions
-		 */
-		_.extend(this, extensions);
-
-		if (!this.$el) {
-			throw new Error('No "$el" property found on dock.');
-		}
-
-		// get the container.
-		var $container = this.$container;
-
-		if ($container) {
-			this.$container = _.isString($container) ? this.$el.find($container) : $container;
-		} else {
-			this.$container = this.$el;
-		}
-
-
-		// bind event handlers
-		_.bindAll(this, 'handleAdd', 'handleRemove', 'handleReset', 'handleResort');
+			// initialize collection-dock
+			this.initializeCollectionDock.apply(this, arguments);
+		},
 
 		/**
-		 * Hash on which itemView instances are stored, keyed by model CID
+		 * Initialization logic for collectionDock
 		 *
-		 * @property itemViews
-		 * @type Objects
+		 * @method initializeCollectionDock
+		 * @param options {Object}
 		 */
-		this.itemViews = {};
+		initializeCollectionDock: function initializeCollectionDock(options) {
+
+			/**
+			 * The extensions object will be incorporated to the new object.
+			 *
+			 * @param extensions
+			 */
+			this.collection = options.collection || this.collection;
+
+			if (!this.$el) {
+				throw new Error('No "$el" property found on dock.');
+			}
+
+			// get the container.
+			var $container = this.$container;
+
+			if ($container) {
+				this.$container = _.isString($container) ? this.$el.find($container) : $container;
+			} else {
+				this.$container = this.$el;
+			}
+
+
+			// bind event handlers
+			_.bindAll(this, 'handleAdd', 'handleRemove', 'handleReset', 'handleResort');
+
+			/**
+			 * Hash on which itemView instances are stored, keyed by model CID
+			 *
+			 * @property itemViews
+			 * @type Objects
+			 */
+			this.itemViews = {};
+		},
 	});
 
 	dock.proto(require('./__collection-dock/attach'));

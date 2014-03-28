@@ -19,42 +19,56 @@ define(function (require, exports, module) {
 	 * @constructor
 	 * @param extensions {Object}
 	 */
-	var dock = module.exports = backbone.view.extend(function collectionDock(extensions) {
+	var dock = module.exports = backbone.view.extend({
+		initialize: function (options) {
 
-		// initialize basic view
-		backbone.view.prototype.initialize.apply(this, arguments);
+			// initialize basic view
+			backbone.view.prototype.initialize.apply(this, arguments);
 
-		/**
-		 * The extensions object will be incorporated to the new object.
-		 *
-		 * @param extensions
-		 */
-		_.extend(this, extensions);
-
-		if (!this.$el) {
-			throw new Error('No "$el" property found on dock.');
-		}
-
-		// get the container.
-		var $container = this.$container;
-
-		if ($container) {
-			this.$container = _.isString($container) ? this.$el.find($container) : $container;
-		} else {
-			this.$container = this.$el;
-		}
-
-
-		// bind event handlers
-		_.bindAll(this, 'handleAdd', 'handleRemove', 'handleReset', 'handleResort');
+			// initialize collection-dock
+			this.initializeCollectionDock.apply(this, arguments);
+		},
 
 		/**
-		 * Hash on which itemView instances are stored, keyed by model CID
+		 * Initialization logic for collectionDock
 		 *
-		 * @property itemViews
-		 * @type Objects
+		 * @method initializeCollectionDock
+		 * @param options {Object}
 		 */
-		this.itemViews = {};
+		initializeCollectionDock: function initializeCollectionDock(options) {
+
+			/**
+			 * The extensions object will be incorporated to the new object.
+			 *
+			 * @param extensions
+			 */
+			this.collection = options.collection || this.collection;
+
+			if (!this.$el) {
+				throw new Error('No "$el" property found on dock.');
+			}
+
+			// get the container.
+			var $container = this.$container;
+
+			if ($container) {
+				this.$container = _.isString($container) ? this.$el.find($container) : $container;
+			} else {
+				this.$container = this.$el;
+			}
+
+
+			// bind event handlers
+			_.bindAll(this, 'handleAdd', 'handleRemove', 'handleReset', 'handleResort');
+
+			/**
+			 * Hash on which itemView instances are stored, keyed by model CID
+			 *
+			 * @property itemViews
+			 * @type Objects
+			 */
+			this.itemViews = {};
+		},
 	});
 
 	dock.proto(require('./__collection-dock/attach'));

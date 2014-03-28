@@ -9,8 +9,7 @@ define(function (require, exports, module) {
 	'use strict';
 
 	// external
-	var _ = require('lodash'),
-		q = require('q');
+	var _ = require('lodash');
 
 	/**
 	 * Builds the itemvieW.

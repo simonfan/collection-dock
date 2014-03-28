@@ -9,8 +9,7 @@ define(function (require, exports, module) {
 
 	// external
 	var _ = require('lodash'),
-		$ = require('jquery'),
-		q = require('q');
+		$ = require('jquery');
 
 	/**
 	 * Handles add events on the collection.

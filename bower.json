@@ -1,14 +1,12 @@
 {
   "name": "collection-dock",
   "main": "built/collection-dock.js",
-  "version": "0.3.3",
+  "version": "0.4.3",
   "description": "Some module...",
   "dependencies": {
     "lodash": "~2.4.1",
-    "q": "~1.0.0",
     "jquery": "~2.1.0",
-    "lowercase-backbone": "*",
-    "model-dock": "0.2.5"
+    "lowercase-backbone": "*"
   },
   "devDependencies": {
     "requirejs": "*",
@@ -16,11 +14,7 @@
     "underscore": "*",
     "jquery": "*",
     "qunit": "*",
-    "backbone": "~1.1.1"
-  },
-  "resolutions": {
-    "jquery": "~2.1.0",
-    "model-dock": "0.2.5",
-    "jquery.filler": "0.2.3"
+    "backbone": "~1.1.1",
+    "q": "~2.0.0"
   }
 }

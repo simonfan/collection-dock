@@ -1,31 +1,42 @@
 define(function (require, exports, module) {
+	'use strict';
 
-	var modelDock = require('model-dock'),
-		$ = require('jquery');
+	var $ = require('jquery'),
+		backbone = require('lowercase-backbone');
 
-	module.exports = modelDock.extend({
+	module.exports = backbone.view.extend({
 
 		/**
-		 * Saves reference to the collectionView
+		 *
 		 *
 		 * @method initialize
 		 * @param options {Object}
 		 */
-		initialize: function initializeCollectionItemView(options) {
-			// save reference to collectionView
-			// this must be done before modelDock.initialize,
-			// as the render method requires the collectionView object.
-			this.collectionView = options.collectionView;
+		initialize: function (options) {
 
-			modelDock.prototype.initialize.apply(this, arguments);
+			backbone.view.prototype.initialize.apply(this, arguments);
+
+			this.initializeItemView.apply(this, arguments);
+
+			this.render();
+		},
+
+		/**
+		 * Holds initialization logic exclusive to itemView.
+		 *
+		 * @method initializeItemView
+		 * @param options {Object}
+		 */
+		initializeItemView: function initializeItemView(options) {
+			this.collectionView = options.collectionView;
 		},
 
 
 		html: '<div></div>',
 
 		/**
-		 * This method is invoked by modelDock.prototype.initialize,
-		 * as the modelDock requires the html to be ready before
+		 * This method is invoked by backbone.view.prototype.initialize,
+		 * as the backbone.view requires the html to be ready before
 		 * attachment intialization.
 		 *
 		 * @method render
@@ -64,7 +75,7 @@ define(function (require, exports, module) {
 			// remove itself from collection view
 			this.collectionView.removeView(this.model.cid);
 
-			modelDock.prototype.remove.apply(this, arguments);
+			backbone.view.prototype.remove.apply(this, arguments);
 		},
 	});
 });
